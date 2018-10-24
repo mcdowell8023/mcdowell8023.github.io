@@ -83,7 +83,7 @@ deploy:
   repo: git@github.com:mcdowell8023/mcdowell8023.github.io.git
   branch: master
 
-## feed
+## feed 订阅 rss
 feed:
   type: atom
   path: atom.xml
