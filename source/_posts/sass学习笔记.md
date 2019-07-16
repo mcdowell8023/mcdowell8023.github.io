@@ -6,10 +6,11 @@ categories:
   - web前端笔记
 tags:
   - sass
-comments: false
+comments: true
 ---
 
 ## sass 介绍
+
 ##### 特性
 - 在 CSS 基础上增加**变量**、**嵌套 (nesting)**、**混合 (mixins)** **导入 (inline imports)** 等功能
 - 通过函数进行**颜色值与属性值的运算**
@@ -27,7 +28,7 @@ comments: false
 
 #### 嵌套规则
 
-```
+```sass
 #main {// 父级
   width: 97%;
 
@@ -48,7 +49,7 @@ comments: false
 
 #### 父选择器 &
 
-```
+```sass
 #main {
   color: black;
   a {
