@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>mcdowell博客</title>
+  
+  <subtitle>博客+笔记</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://mcdowell8023.github.io/"/>
+  <updated>2019-07-16T17:37:03.448Z</updated>
+  <id>http://mcdowell8023.github.io/</id>
+  
+  <author>
+    <name>mcdowell</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sass学习笔记</title>
+    <link href="http://mcdowell8023.github.io/2018/10/25/sass%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://mcdowell8023.github.io/2018/10/25/sass学习笔记/</id>
+    <published>2018-10-25T12:20:28.000Z</published>
+    <updated>2019-07-16T17:37:03.448Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- build time:Wed Jul 17 2019 02:13:28 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;sass-介绍&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#sass-介绍&quot;&gt;&lt;/a&gt; sass 介绍&lt;
+      
+    
+    </summary>
+    
+      <category term="web前端笔记" scheme="http://mcdowell8023.github.io/categories/web%E5%89%8D%E7%AB%AF%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="sass" scheme="http://mcdowell8023.github.io/tags/sass/"/>
+    
+  </entry>
+  
+</feed>
