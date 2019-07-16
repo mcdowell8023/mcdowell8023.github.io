@@ -1,3 +1,3 @@
-[submodule "themes/themes/pure"]
-	path = themes/themes/pure
+[submodule "themes/pure"]
+	path = themes/pure
 	url = https://github.com/mcdowell8023/hexo-theme-pure.git
