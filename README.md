@@ -2,6 +2,10 @@
 <h1 align="center">mcdowell Blog Project</h1>
 基于 hexo 的博客项目
 
+## 部署后地址：
+github :[https://mcdowell8023.github.io]
+coding :[https://mcdowell8023.coding.me]
+
 ## 说明：
   - hexo : https://hexo.io/zh-cn/docs
   - 主题 pure: https://github.com/cofess/hexo-theme-pure

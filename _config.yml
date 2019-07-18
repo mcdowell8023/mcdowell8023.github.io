@@ -30,7 +30,7 @@ skip_render:
 
 # Writing
 new_post_name: :title.md # File name of new posts
-default_layout: post
+default_layout: mylayout
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
@@ -80,8 +80,12 @@ theme: pure
 deploy:
   type: git
   # repo: https://github.com/mcdowell8023/mcdowellblog.git
-  repo: git@github.com:mcdowell8023/mcdowell8023.github.io.git
-  branch: master
+  # repo: git@github.com:mcdowell8023/mcdowell8023.github.io.git
+  # branch: master
+  repo: 
+    coding: git@git.dev.tencent.com:mcdowell8023/mcdowell8023.git,master
+    github: git@github.com:mcdowell8023/mcdowell8023.github.io.git,master
+  
 
 ## feed 订阅 rss
 feed:
