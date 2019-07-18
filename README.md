@@ -62,7 +62,7 @@ coding :[https://mcdowell8023.coding.me]
 
   # build
 
-  hexo clean # hexo c // 清理
+  hexo clean # 清理
   hexo generate # hexo g
   hexo deploy # hexo d
 

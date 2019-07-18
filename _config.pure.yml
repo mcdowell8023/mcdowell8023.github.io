@@ -199,7 +199,7 @@ profile:
   author_title: Web 前端 & 90后
   author_description: 一线前端从业人员。
   location: 北京, 中国
-  follow: https://github.com/cofess
+  follow: https://github.com/mcdowell8023
   # Social Links
   social:
     links:
@@ -210,7 +210,8 @@ profile:
       # facebook: /
       # dribbble: /
       # behance: https://www.behance.net/cofess
-      # rss: atom.xml
+      coding: https://mcdowell8023.coding.me
+      rss: atom.xml
     link_tooltip: true # enable the social link tooltip, options: true, false
   # My Skills 
   # skills:
