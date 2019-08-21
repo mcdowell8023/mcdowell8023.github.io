@@ -42,18 +42,21 @@ coding :[https://mcdowell8023.coding.me]
 ## 启动
 
 ```bash
+
   git checkout dev # 切换到dev[dev是博客源码]，master分支用hexo -d [用于部署编译后文件]
-  cd themes/pure/
-  git submodule init
-  git submodule update # 获取我的pure主题的配置
+
+  # 废弃 直接正常启动 主题文件已经嵌入 项目
+  # cd themes/pure/
+  # git submodule init
+  # git submodule update # 获取我的pure主题的配置
 
   # rely on
 
-  npm install -g hexo
-  npm install hexo-cli -g
-  npm install hexo --save
-  npm install hexo-server --save
-  npm install hexo-deployer-git --save
+  # npm install -g hexo
+  # npm install hexo-cli -g
+  # npm install hexo --save
+  # npm install hexo-server --save
+  # npm install hexo-deployer-git --save
   npm install
 
   # start
@@ -70,6 +73,14 @@ coding :[https://mcdowell8023.coding.me]
 ```
 
 ## 维护
+
+### 新建文章
+```
+  hexo new [layout] <title>
+  # eg: hexo new mylayout 'git常用命令'
+  
+```
+
 
 ### 主题文件
 
