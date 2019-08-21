@@ -13,7 +13,7 @@ date: 2019-08-21 11:23:21
 
 ## Git 常用命令清单
 
-[转载 阮老师博客](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
+[转载 阮老师博客 ](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html) 部分修改
 
 ### 说明
 
@@ -22,7 +22,7 @@ date: 2019-08-21 11:23:21
 >Repository：仓库区（或本地仓库）
 >Remote：远程仓库
 
-一、新建代码库
+#### 一、新建代码库
 
 ```bash
   # 在当前目录新建一个Git代码库
@@ -35,7 +35,7 @@ date: 2019-08-21 11:23:21
   $ git clone [url]
 ```
 
-二、配置
+#### 二、配置
 Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
 
 ```bash
@@ -50,7 +50,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
   $ git config [--global] user.email "[email address]"
 ```
 
-三、增加/删除文件
+#### 三、增加/删除文件
 
 ```bash
   # 添加指定文件到暂存区
@@ -77,7 +77,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
 ```
 
-四、代码提交
+#### 四、代码提交
 
 ```bash
   # 提交暂存区到仓库区
@@ -101,7 +101,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
 ```
 
-五、分支
+#### 五、分支
 
 ```bash
   # 列出所有本地分支
@@ -149,7 +149,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
 ```
 
-六、标签
+#### 六、标签
 
 ```bash
   # 列出所有tag
@@ -181,7 +181,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
 ```
 
-七、查看信息
+#### 七、查看信息
 
 ```bash
   # 通过图像方式查看提交历史
@@ -250,7 +250,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
 ```
 
-八、远程同步
+#### 八、远程同步
 
 ```bash
   # 下载远程仓库的所有变动
@@ -279,7 +279,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
 ```
 
-九、撤销
+#### 九、撤销
 
 ```bash
   # 恢复暂存区的指定文件到工作区
@@ -316,7 +316,31 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
 ```
 
-十、其他
+#### 十、子仓库 git submodule
+
+```bash
+  # 添加子仓库
+  $ git submodule add <仓库地址> <本地路径>
+
+  # 检出子仓库
+
+  # 初始化本地配置文件
+  $ git submodule init
+
+  # 检出父仓库列出的commit
+  $ git submodule update
+
+  # 或者使用组合指令。
+  $ git submodule update --init --recursive
+
+  # 删除子仓库
+  # 1删除.gitsubmodule里相关部分
+  # 2删除.git/config 文件里相关字段
+  # 3删除子仓库目录。
+  $ git rm -r --cached <本地路径>
+```
+
+#### 十一、其他
 
 ```bash
   # 生成一个可供发布的压缩包

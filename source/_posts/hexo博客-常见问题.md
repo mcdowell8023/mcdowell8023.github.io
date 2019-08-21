@@ -53,7 +53,7 @@ date: 2019-07-18 00:15:05
 - 然后先删掉你原来主题文件 【❗️ 备份 ❗ 备份 ️❗️ 备份】
 
   ```bash
-    git rm -r --cached theme/< 主题目录 >
+    git rm -r --cached themes/< 主题目录 >
   ```
 
 - 添加 submodlue

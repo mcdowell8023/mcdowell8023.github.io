@@ -45,10 +45,17 @@ coding :[https://mcdowell8023.coding.me]
 
   git checkout dev # 切换到dev[dev是博客源码]，master分支用hexo -d [用于部署编译后文件]
 
-  # 废弃 直接正常启动 主题文件已经嵌入 项目
-  # cd themes/pure/
+  
+  cd themes/pure/
   # git submodule init
   # git submodule update # 获取我的pure主题的配置
+  git submodule update --init --recursive
+
+  # 如果失败 抱歉删掉目录 从新添加
+  git rm -r --cached themes/pure
+  git submodule add git@github.com:mcdowell8023/hexo-theme-pure.git themes/pure
+
+
 
   # rely on
 
