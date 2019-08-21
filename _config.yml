@@ -83,8 +83,8 @@ deploy:
   # repo: git@github.com:mcdowell8023/mcdowell8023.github.io.git
   # branch: master
   repo: 
-    coding: git@git.dev.tencent.com:mcdowell8023/mcdowell8023.git,master
     github: git@github.com:mcdowell8023/mcdowell8023.github.io.git,master
+    coding: git@git.dev.tencent.com:mcdowell8023/mcdowell8023.git,master
   
 
 ## feed 订阅 rss
@@ -117,7 +117,7 @@ neat_js:
   compress:
   exclude:
     - '*.min.js' 
-# 使用 新模版引擎 解决数学共识问题
+# 使用 新模版引擎 解决数学公式问题
 markdown_it_plus:
   highlight: true
   html: true

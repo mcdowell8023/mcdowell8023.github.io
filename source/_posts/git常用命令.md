@@ -11,9 +11,9 @@ tags:
 date: 2019-08-21 11:23:21
 ---
 
-## Git 常用命令清单
+## git 常用命令清单
 
-[转载 阮老师博客 ](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html) 部分修改
+[转载 阮老师博客](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html) 部分修改
 
 ### 说明
 
