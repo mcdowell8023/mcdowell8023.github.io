@@ -66,6 +66,8 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
   # 对于同一个文件的多处变化，可以实现分次提交
   $ git add -p
 
+  # 移除文件
+  $ git rm -f *
   # 删除工作区文件，并且将这次删除放入暂存区
   $ git rm [file1] [file2] ...
 
@@ -288,8 +290,13 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
   # 恢复某个commit的指定文件到暂存区和工作区
   $ git checkout [commit] [file]
 
+  # 从仓库取出file覆盖当前分支
+  $ git checkout branch|tag|commit -- file_name
+
   # 恢复暂存区的所有文件到工作区
   $ git checkout .
+
+
 
   # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
   $ git reset [file]
@@ -306,13 +313,52 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
   # 重置当前HEAD为指定commit，但保持暂存区和工作区不变
   $ git reset --keep [commit]
 
-  # 新建一个commit，用来撤销指定commit
-  # 后者的所有变化都将被前者抵消，并且应用到当前分支
+
+
+  # 取消已经暂存的文件
+  $ git reset HEAD *
+
+  # 同上
+  $ git reset --mixed HEAD *
+
+  # 重置到指定状态，不会修改索引区和工作树
+  $ git reset --soft HEAD *
+
+  # 重置到指定状态，会修改索引区和工作树
+  $ git reset --hard HEAD *
+
+  # 重置index区文件
+  $ git reset -- files
+
+  #撤销前一次操作
+  $ git revert HEAD
+
+  #撤销前前一次操作
+  $ git revert HEAD~
+
+  # 撤销指定操作commit 所有变化都将被前者抵消，并且应用到当前分支
   $ git revert [commit]
 
+
+
   # 暂时将未提交的变化移除，稍后再移入
+  # 将工作区现场（已跟踪文件）储藏起来，等以后恢复后继续工作。
   $ git stash
+
+  # 查看保存的工作现场
+  $ git stash list
+
+  # 恢复工作现场
+  $ git stash apply
+
+  # 删除stash内容
+  $ git stash drop
+
+  # 恢复的同时直接删除stash内容
   $ git stash pop
+  
+  # 恢复指定的工作现场，当你保存了不只一份工作现场时
+  $ git stash apply stash@{0}
 
 ```
 
