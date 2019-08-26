@@ -485,9 +485,53 @@ date: 2019-08-21 16:37:24
 
 具体还可参考：
 [Deleting a Git commit](https://www.jianshu.com/p/073acdc79c7b)
-[在Git中，如何『删除』commit？](https://blog.csdn.net/u013553529/article/details/88087047)
+[在 Git 中，如何『删除』commit？](https://blog.csdn.net/u013553529/article/details/88087047)
 
 ### 操作标签
+
+> 标签操作允许为存储库中的特定版本提供有意义的名称。
+
+#### 创建标签
+
+```bash
+  # 创建标签
+  $ git tag -a 'tag1' -m 'tag1的说明' [HEAD / commit id / 缺省]
+  # -a选项的 标签名称，-m选项的 标签消息。
+  # 缺省：HEAD 要标记特定提交，则使用相应的COMMIT ID而不是HEAD指针
+
+  # 将 tag1 推送到 origin 远端
+  $ git push origin <tagname>
+
+  # 一次性推送全部尚未推送到远程的本地标签
+  $ git push origin --tags
+```
+
+#### 查看标签
+
+```bash
+  $ git tag
+  # 查看 所有可用的标签
+  $ git tag -l
+
+  # 查看 tagName标签的 详细信息
+  $ git show tagName
+```
+
+#### 删除标签
+
+```bash
+  # 查看 所有可用的标签
+  $ git tag -l
+
+  # 删除 tagName标签
+  $ git tag -d <tagName>
+
+  # 删除 远端 tag 标签
+  $ git push origin --delete tag <tagname>
+
+  # 删除 远端 tag 标签 类似 删除远端分支的做法
+  $ git push origin :refs/tags/标签名
+```
 
 ### 操作分支
 
@@ -588,6 +632,42 @@ OR
   # 增补提交（修改上次提交），会使用与当前提交节点相同的父节点进行一次新的提交，旧的提交将会被取消。
   $ git commit --amend
 
+
+
+```
+
+### git remote 详解
+
+> git remote 命令管理一组跟踪的存储库
+
+```bash
+# 查看当前的远程库
+# 列出已经存在的远程分支
+$ git remote
+#  列出详细信息，在每一个名字后面列出其远程url
+$ git remote [-v | --verbose]
+
+# 添加一个名字为 <name> 的 远程服务器
+# $ git remote add <name> <url>
+$ git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
+# 重命名 远程链接
+$ git remote rename <old> <new>
+# 删除 远程链接
+$ git remote remove <name>
+
+
+$ git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+$ git remote set-branches [--add] <name> <branch>…​
+
+# 获取 <name> 远程服务 地址
+$ git remote get-url [--push] [--all] <name>
+# 设置 <name> 远程服务 地址
+$ git remote set-url [--push] <name> <newurl> [<oldurl>]
+$ git remote set-url --add [--push] <name> <newurl>
+$ git remote set-url --delete [--push] <name> <url>
+$ git remote [-v | --verbose] show [-n] <name>…​
+$ git remote prune [-n | --dry-run] <name>…​
+$ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 
 ```
@@ -694,6 +774,51 @@ OR
   $ git push origin :refs/dev   //删除远程的dev分支
   $ git push origin dev:refs/dev_op
 
+```
+
+### git checkout 详解
+
+> 用于切换分支或恢复工作树文件。这条命令会重写工作区
+
+```bash
+  # 切换 <branch> 分支
+  $ git checkout <branch>
+  # 从 <branch> 分支 提交中取出文件
+  $ git checkout <branch>  <fileName>  
+  # 从暂存区（index） 恢复文件
+  $ git checkout <fileName>
+
+  # 新建 < branch > 分支 并进行切换
+  $ git checkout -b <branch>
+  $ git checkout -b|-B <new_branch> [<start point>] # 完整版
+  # 相当于 执行
+  # git branch newBranch
+  # git checkout newBranch
+
+  # 换到newBranch的远程分
+  $ git checkout -b newBranch  origin/newBranch
+
+
+  # 检出索引中的所有C源文件
+  $ git checkout -- '*.c'
+  # 检出索引中的 fileName文件
+  $ git checkout -- <fileName>
+
+  # 检出索引中的 fileName文件
+  $ git checkout -- <fileName>
+
+  # 用于检出某一个指定文件
+  # 不填写commit id，则默认会从暂存区检出该文件，如果暂存区为空，则该文件会回滚到最近一次的提交状态
+  $ git checkout [-q] [<commit id>] [--] <paths>
+
+  # 当暂存区为空，如果我们想要放弃对某一个文件的修改，可以用这个命令进行撤销
+  $ git checkout [-q] [--] <paths>
+
+  # 新建的分支，严格意义上说，还不是一个分支，因为HEAD指向的引用中没有commit值，只有在进行一次提交后，它才算得上真正的分支
+  $ git checkout --orphan <new_branch>
+
+  # 将当前分支修改的内容一起打包带走，同步到切换的分支下 [切换到新分支后，当前分支修改过的内容就丢失了]
+  $ git checkout --merge <branch>
 ```
 
 ## git 原理
