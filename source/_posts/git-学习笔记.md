@@ -12,9 +12,103 @@ date: 2019-08-21 16:37:24
 
 ## 目录
 
-[说明文字](#test)
+[常见缩写](#bz)
 
-## 安装 git
+[0.安装 git](#0)
+
+[1.初始化](#1初始化)
+&nbsp; &nbsp; [1.1基本配置](#11)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.1.1配置帐号信息](#111配置帐号信息)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.1.2 配置别名](#112)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.1.3 查看配置](#113)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.1.4 参数说明](#114)
+&nbsp; &nbsp; [1.2 生成 shh 密钥](#1.2)
+&nbsp; &nbsp; [1.3 获取 Git 仓库](#1.3)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.3.1 在现有目录中初始化仓库](#1.3.1)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.3.2 克隆现有的仓库](#1.3.2)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.3.3 本地已有构建的项目](#1.3.3)
+&nbsp; &nbsp; [1.4 不进行版本控制](#1.4)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.4.1 添加不进行版本控制的文件目录](#1.4.1)
+&nbsp; &nbsp; &nbsp; &nbsp; [1.4.2 提交 commit 后，想再忽略一些已经提交的文件](#1.4.2)
+
+[2. 常见操作](#2)
+&nbsp; &nbsp; [2.1 查看信息](#2.1)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.1.1 查看帮助 [ git help ]](#2.1.1)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.1.2 查看状态 [ git status ]](#2.1.2)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.1.3 查看变化 [ git diff ]](#2.1.3)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.1.4 查看日志 [ git log ]](#2.1.4)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.1.5 查看某个文件的版本历史 [ git show ]](#2.1.5)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.1.6 图形化查看提交内容 [ gitk ]](#2.1.6)
+&nbsp; &nbsp; [2.2 更新](#2.2)
+&nbsp; &nbsp; [2.3 文件重命名](#2.3)
+&nbsp; &nbsp; [2.4 文件删除](#2.4)
+&nbsp; &nbsp; [2.5 提交](#2.5)
+&nbsp; &nbsp; [2.6 撤销&回滚](#2.6)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.6.1 简单总结](#2.6.1)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.6.2 撤销](#2.6.2)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.2.1 修改文件 尚未提交](#2.6.2.1)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.2.2 修改文件 已经提交（git commit）到 本地仓库](#2.6.2.2)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.6.3 回滚](#常见缩写)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.1 还原 远端服务器 提交的代码](#2.6.3.1)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.2 删除最后一次远程提交](#2.6.3.2)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.3 回滚某次提交](#2.6.3.3)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.4 删除某次提交](#2.6.3.4)
+&nbsp; &nbsp; [2.7 操作标签](#2.7)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.7.1 创建标签](#2.7.1)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.7.2 查看标签](#2.7.2)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.7.3 删除标签](#2.7.3)
+&nbsp; &nbsp; [2.8 操作分支](#2.8)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.8.1 查看分支](#2.8.1)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.8.2 新建分支](#2.8.2)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.8.3 提交到远程分支](#2.8.3)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.8.4 删除分支](#2.8.4)
+&nbsp; &nbsp; &nbsp; &nbsp; [2.8.5 合并分支](#2.8.5)
+&nbsp; &nbsp; [2.9 暂存](#2.9)
+&nbsp; &nbsp; [2.10 分离头【detached HEAD】](#2.10)
+&nbsp; &nbsp; [2.11 操作子仓库](#2.11)
+
+[3. 常用命令详解](#常用命令详解)
+&nbsp; &nbsp; [3.1 git pull 详解](#3.1)
+&nbsp; &nbsp; [3.2 git fetch 详解](#3.2)
+&nbsp; &nbsp; [3.3 git add 详解](#3.3)
+&nbsp; &nbsp; [3.4 git commit 详解](#3.4)
+&nbsp; &nbsp; [3.5 git remote 详解](#3.5)
+&nbsp; &nbsp; [3.6 git push 详解](#3.6)
+&nbsp; &nbsp; [3.7 git branch 详解](#3.7)
+&nbsp; &nbsp; [3.8 git checkout 详解](#3.8)
+&nbsp; &nbsp; [3.9 git reset 详解](#3.9)
+&nbsp; &nbsp; [3.10 git cherry-pick 详解](#3.10)
+&nbsp; &nbsp; [3.11 git submodule 详解](#3.11)
+
+[4. git 原理](#4)
+&nbsp; &nbsp; [4.1 git 工作解析图](#4.1)
+&nbsp; &nbsp; [4.2 git 文件目录 ](#4.2)
+&nbsp; &nbsp; [4.3 commit 与 tree 和 blob 的关系 ](#4.3)
+
+[5. git 注意事项 ](#5)
+
+## 常见缩写
+
+<span id="#bz"></span>
+
+```bash
+
+  -d  --delete：删除
+
+  -D  --delete --force的快捷键
+
+  -f  --force：强制
+
+  -m  --move：移动或重命名
+
+  -M  --move --force的快捷键
+
+  -r  --remote：远程
+
+  -a  --all：所有
+```
+
+## 0.安装 git
 
 > 已有？请跳过
 
@@ -26,11 +120,11 @@ date: 2019-08-21 16:37:24
   git --version
 ```
 
-## 初始化
+## 1.初始化
 
-### 基本配置
+### 1.1 基本配置
 
-#### 配置帐号信息
+#### 1.1.1配置帐号信息
 
 ```bash
   # 设置 [本仓库 | 全局 | 系统 ] 的 用户名称
@@ -41,7 +135,7 @@ date: 2019-08-21 16:37:24
 
 > 当然你也可以通过修改 .git 文件目录下面的 config 文件进行修改
 
-#### 配置别名
+#### 1.1.2 配置别名
 
 ```bash
   # 配置别名
@@ -52,7 +146,7 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 查看配置
+#### 1.1.3 查看配置
 
 ```bash
   # 查看配置
@@ -62,7 +156,7 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 参数说明
+#### 1.1.4 参数说明
 
 - local：区域为本仓库
 - global: 当前用户的所有仓库
@@ -71,7 +165,7 @@ date: 2019-08-21 16:37:24
 > 缺省等同于 local
 > 优先级：local > global > system
 
-### 生成 shh 密钥
+### 1.2 生成 shh 密钥
 
 > 如果你想通过 https 的方式 每次提交输入密码，当然可以跳过此节
 
@@ -103,9 +197,9 @@ date: 2019-08-21 16:37:24
 
 > 如果公司是自己搭建的 git 服务（未使用 gitlab），则交给管理员添加。如果使用 gitlab 在设置增加密钥
 
-### 获取 Git 仓库
+### 1.3 获取 Git 仓库
 
-#### 在现有目录中初始化仓库
+#### 1.3.1 在现有目录中初始化仓库
 
 ```bash
   # 初始化本地仓库 缺省 为当前目录
@@ -123,21 +217,39 @@ date: 2019-08-21 16:37:24
   $ git push -u origin master
 ```
 
-#### 克隆现有的仓库
+#### 1.3.2 克隆现有的仓库
 
 ```bash
   # 克隆远程仓库到本地  fileName 的文件夹内 【缺省-默认远端名称】
   $ git clone [url] <fileName/缺省>
+  # 克隆 为 裸仓库【中心仓库】
+  $ git clone --bare [ 连接地址 ] < file bf名称 >
+
 ```
 
-### 不进行版本控制
+> 从裸仓库 clone 下来的本地仓库可以进行正常的 push 操作， 但是从一般仓库 clone 下来的本地仓库却不行。 这也正是裸仓库存在的意义。 裸仓库一般情况下是作为远端的中心仓库而存在的。
 
-#### 添加不进行版本控制的文件目录
+#### 1.3.3 本地已有构建的项目
+
+```bash
+  $ git remote -v #查看远程版本库信息
+  $ git remote add github <url> #添加github远程版本库
+  $ git fetch github #拉取远程版本库
+  $ git merge -h #查看合并帮助信息
+  $ git merge --allow-unrelated-histories github/master
+  # or git pull origin master --allow-unrelated-histories
+  # 对github上的master分支与本地master分支进行合并（两分支不是父子关系，所以合并需要添加 --allow-unrelated-histories）
+  $ git push github #推送同步到github仓库
+```
+
+### 1.4 不进行版本控制
+
+#### 1.4.1 添加不进行版本控制的文件目录
 
 > 项目目录下 新建 .gitignore 文件 ，写入不需要进行版本控制的文件名或文件夹
 
 ```bash
-// 文件示例
+  # 文件示例
   node_modules # 对 node_modules文件夹及其文件 及 node_modules文件 不进行版本控制
 
   doc   # 对 [doc文件夹及其子文件 和 名称为doc的文件] 不进行版本控制
@@ -148,22 +260,22 @@ date: 2019-08-21 16:37:24
 
   *.md // 对 .md结尾的文件 不进行版本控制
 
-  /* 复合示例 */
+  # /* 复合示例 */
   doc
   !doc/* # git管doc文件夹，不管doc文件
 
 ```
 
-#### 提交 commit 后，想再忽略一些已经提交的文件
+#### 1.4.2 提交 commit 后，想再忽略一些已经提交的文件
 
 1. 把忽略的文件添加到 .gitignore;
 2. 通过 git rm -- cached < file > 的方式删除掉 git 仓库里面无需跟踪的文件。
 
-## 常见操作
+## 2. 常见操作
 
-### 查看信息
+### 2.1 查看信息
 
-#### 查看帮助 [ git help ]
+#### 2.1.1 查看帮助 [ git help ]
 
 ```bash
     # 所有可用的命令都将打印在标准输出上
@@ -176,7 +288,7 @@ date: 2019-08-21 16:37:24
     $ git help git
 ```
 
-#### 查看状态 [ git status ]
+#### 2.1.2 查看状态 [ git status ]
 
 > git status 命令用于显示工作目录和暂存区的状态。git status 不显示已经 commit 到项目历史中去的信息。看项目历史的信息要使用 git log
 
@@ -192,7 +304,7 @@ date: 2019-08-21 16:37:24
   $ git status -s # or $ git status --short
 ```
 
-#### 查看变化 [ git diff ]
+#### 2.1.3 查看变化 [ git diff ]
 
 > 对比 修改之后还没有暂存起来的内容变化
 
@@ -214,9 +326,35 @@ date: 2019-08-21 16:37:24
   $ git diff HEAD # 显示工作版本(Working tree)和HEAD的差别
 
   $ git diff test # 查看当前目录和另外一个分支(test)的差别
+
+
+  # 假定：HEAD、缓存区、工作区中的readme.md文件内容均不相同。
+  # 比较 工作区 <===> HEAD
+  $ git diff HEAD -- readme.md
+  #  比较 工作区 <===> 缓存区
+  $ git diff -- readme.md
+  # 比较 缓存区 <===> HEAD
+  $ git diff --cached -- readme.md
+  # 比较两个提交或分支的差异
+  $ gti diff [分支名称/commit-id] [分支名称/commit-id] --< file >
+  # 对比两个版本的不同
+  $ git diff [commit号] [commit号]
+
+  # 对比 当前提交版本与上次提交
+  $ git diff HEAD HEAD^[同 HEAD～1]
+
+  # 对比当前提交版本与上上次（前两次）提交
+  $ git diff HEAD HEAD^^[同HEAD～2]
 ```
 
-#### 查看日志 [ git log ]
+补充说明：
+
+1.  一个节点，可以包含多个子节点（checkout 出多个分支）
+2.  一个节点可以有多个父节点（多个分支合并）
+3.  ^是~都是父节点，区别是跟随数字时候，^2 是第二个父节点，而~2 是父节点的父节点
+4.  ^和~可以组合使用,例如 HEAD~2^2
+
+#### 2.1.4 查看日志 [ git log ]
 
 ```bash
   # 查看所有分支的历史 git log 等同于它
@@ -236,7 +374,7 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 查看某个文件的版本历史 [ git show ]
+#### 2.1.5 查看某个文件的版本历史 [ git show ]
 
 ```bash
     // 先查看文件提交历史
@@ -245,7 +383,7 @@ date: 2019-08-21 16:37:24
     git show [版本号] // 显示具体的某次的改动的修改
 ```
 
-#### 图形化查看提交内容 [ gitk ]
+#### 2.1.6 图形化查看提交内容 [ gitk ]
 
 ```bash
     # 在当前目录下输入，弹出图形化界面
@@ -256,7 +394,7 @@ date: 2019-08-21 16:37:24
 
 > 定制化图形界面 ： view --> new view [勾选 all refs] # 显示全部分支
 
-### 更新
+### 2.2 更新
 
 - 使用 git pull 进行更新
 
@@ -280,7 +418,7 @@ date: 2019-08-21 16:37:24
   $ git merge origin/master
 ```
 
-### 文件重命名
+### 2.3 文件重命名
 
 - 先删除文件再添加文件
 
@@ -359,6 +497,12 @@ date: 2019-08-21 16:37:24
 
 ### 撤销&回滚
 
+#### 简单总结
+
+1. 修改了工作区，恢复：git checkout
+2. add 后，想撤销： git reset HEAD
+3. commit 后，想撤销： git reset --hard [需要回退的 commit id]
+
 #### 撤销
 
 ##### 修改文件 尚未提交
@@ -378,6 +522,11 @@ date: 2019-08-21 16:37:24
   $ git reset HEAD fileName
   # 撤销修改
   $ git checkout < fileName >
+
+  # 暂存区的 commitid 覆盖工作区修改
+  $ git checkout [commitid] -- <file>
+
+  # git checkout 5384b04 -- src/pages/AdScreen/components/commonStream.vue // 回退 5384b04 的文件
 ```
 
 - 同时对多个文件执行了 git add 操作，本次只想提交其中一部分文件
@@ -438,16 +587,20 @@ date: 2019-08-21 16:37:24
 
 - 使用 revert
 
-```
+```bash
+
   $ git revert HEAD
   $ git push origin master
+
 ```
 
 - 使用 reset
 
-```
+```bash
+
   $ git reset --hard HEAD^
   $ git push origin master -f
+
 ```
 
 二者区别：
@@ -535,7 +688,194 @@ date: 2019-08-21 16:37:24
 
 ### 操作分支
 
-### 合并分支
+#### 查看分支
+
+```bash
+  # 查看分支
+  git branch -v
+  # 查看本地分支对应的远程分支
+  $ git branch -av
+```
+
+#### 新建分支
+
+```bash
+  # 新建一个名字为 dev2 的分支 (不切换到新分支)
+  $ git branch dev2
+
+  # 新建一个名字为 dev2 的分支 并切换到该分支
+  $ git checkout -b <branchname>
+
+  # 从某个版本创建分支 并切换到该分支
+  $ git checkout -b <branchname> [commit号/分支名称]
+
+  # 创建并切换分支
+  $ git checkout -b <branchname> [commit版本号]
+  # 基于 远端分支 建立 本地分支（远程分支名x） 采用此种方法建立的本地分支会和远程分支建立映射关系
+  $ git checkout -b <本地分支名x> <origin/远程分支名x>
+
+  /* 相当于分别执行了下面两条命令 */
+  # git branch <branchname>
+  # git checkout <branchname>
+```
+
+#### 提交到远程分支
+
+```bash
+  $ git push [origin] <分支名称>:<分支名称>
+  # 本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）
+  $ git pull [origin] <分支名称> 更新远程分支到本地
+
+  # /* 远程分支关联 */
+  $ git branch --set-upstream-to=[origin]/<分支名称>
+  # 接下来就 可以直接pull 或者push 了
+
+  # 查看关联的分支名称
+  $ git branch -vv
+```
+
+> [origin] 代指 添加远程裸仓库地址时候，创建的名称
+
+#### 删除分支
+
+```bash
+  #  删除分支 -d是删除  -D 是强制删除
+  $ git branch [-D/-d] <branchname>
+
+  # 删除远程分支
+  $ git branch -d -r <branchname>
+  $ git push origin :<branchname>
+  # OR
+  $ git branch # 查看分支名称
+  $ git push origin --delete <branchname>
+
+```
+
+#### 合并分支
+
+fast-forward
+
+- fast-forward 方式 合并
+  > 这种方法相当于直接把 master 分支移动到 test 分支所在的地方，并移动 HEAD 指针
+
+```bash
+  # 先切换到主分支，为合并分支准备
+  $ git checkout master
+  # 进行合并
+  $ git merge dev
+
+```
+
+- no-fast-forward 方式 合并
+  > 这种合并方法会在 master 分支上新建一个提交节点，从而完成合并
+
+```bash
+  # 先切换到主分支，为合并分支准备
+  $ git checkout master
+  # 进行合并
+  $ git merge –no-ff dev
+
+```
+
+- squash 方式 合并
+  > squash 和 no-ff 非常类似，区别只有一点不会保留对合入分支的引用
+
+```bash
+  $ git checkout master
+  $ git merge –squash dev
+```
+
+- rebase 方式 合并
+  > rebase 与 merge 不同，rebase 会将合入分支上超前的节点在待合入分支上重新提交一遍，变成线性历史
+
+```bash
+  # 先切换到主分支，为合并分支准备
+  $ git checkout master
+  # 进行合并
+  $ git rebase dev
+
+```
+
+- cherry-pick 挑拣 合并
+  对已经存在的 commit 进行 再次提交 [选择某些节点进行合并]
+
+```bash
+
+  $ git cherry-pick <commit id>
+```
+
+> 当执行完 cherry-pick 以后，将会 生成一个新的提交；这个新的提交的哈希值和原来的不同，但标识名 一样；
+> [图解 4 种 git 合并分支方法](https://yanhaijing.com/git/2017/07/14/four-method-for-git-merge/) > [git cherry-pick 的使用](https://blog.csdn.net/FightFightFight/article/details/81039050)
+
+### 暂存
+
+当收到紧急任务，手里又存在未完成的模块可以先放到暂存区
+
+```bash
+    git stash # 暂存
+
+    git stash list # 查看暂存列表
+
+    git stash apply [序号/缺省为stash@{0}] # 恢复暂存进度到工作区
+
+    git stash pop [序号/缺省为stash@{0}] # 恢复暂存进度到工作区并删除
+    # git stash pop = git stash pop stash@{0}
+
+```
+
+### 分离头【detached HEAD】
+
+执行 git checkout [commit 版本号] ，git 会提示显示处于分离头（**无分支状态**），在此状态下，进行的提交操作不挂到在分支下，直接切换分支，会导致分离头的提交丢失。
+
+错误示范：
+
+```bash
+    git checkout 15a6686b624 # 检出15a6686b624的提交，到分离头情况
+
+    git commit -am"错误示例" # 创建一次提交
+    git branch -av # 查看分支
+
+    git checkout marst # 切换到marst 分支  此时git 会提示你，对分离头提交
+
+    # 最后一次补救
+    git branch [分支名称] [commit版本号]
+
+```
+
+正常使用
+
+```bash
+    # 使用某个提交创建分支
+    git checkout -b [分支名称] [commit版本号] // 创建并切换分支
+
+    git checkout -b 本地分支名x origin/远程分支名x // 基于 远端分支 建立 本地分支（远程分支名x） 采用此种方法建立的本地分支会和远程分支建立映射关系
+```
+
+### 操作子仓库
+
+```bash
+  # 添加子仓库
+  $ git submodule add <仓库地址> <本地路径>
+
+  # 检出子仓库
+
+  # 初始化本地配置文件
+  $ git submodule init
+
+  # 检出父仓库列出的commit
+  $ git submodule update
+
+  # 或者使用组合指令。
+  $ git submodule update --init --recursive
+
+  # 删除子仓库
+  # 1删除.gitsubmodule里相关部分
+  # 2删除.git/config 文件里相关字段
+  # 3删除子仓库目录。
+  $ git rm -r --cached <本地路径>
+```
+
+[git submodule 使用小结](https://www.jianshu.com/p/f8a55b972972)
 
 ## 常用命令详解
 
@@ -663,6 +1003,8 @@ $ git remote set-branches [--add] <name> <branch>…​
 $ git remote get-url [--push] [--all] <name>
 # 设置 <name> 远程服务 地址
 $ git remote set-url [--push] <name> <newurl> [<oldurl>]
+# eg: git remote set-url [ 裸仓库名称/常用origin]
+
 $ git remote set-url --add [--push] <name> <newurl>
 $ git remote set-url --delete [--push] <name> <url>
 $ git remote [-v | --verbose] show [-n] <name>…​
@@ -776,6 +1118,59 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
+### git branch 详解
+
+> 用于列出，创建或删除分支
+
+#### 语法
+
+```bash
+
+  # 查看分支
+  $ git branch [-r | -a]
+
+  # 新建分支
+  $ git branch [-f] <branchname>
+
+  # 重命名分支 使用-M则表示强制重命名
+  $ git branch (-m | -M) <oldbranch> <newbranch>
+
+  # 删除分支 使用-D则表示强制删除，相当于 --delete --force
+  $ git branch (-d | -D) <branchname>
+```
+
+> 使用-d 在删除前 Git 会判断在该分支上开发的功能是否被 merge 的其它分支。如果没有，不能删除。如果 merge 到其它分支，但之后又在其上做了开发，使用-d 还是不能删除。-D 会强制删除
+
+#### 示例
+
+```bash
+  # 查看分支
+  $ git branch
+  # 列出所有远程分支
+  $ git branch -r
+  # 查看本地和远程分支
+  $ git branch -a
+  # 查看本地分支对应的远程分支
+  $ git branch -vv
+
+  # 新建一个名字为 dev2 的分支
+  $ git branch dev2
+
+  # 修改分支的名字
+  #你需要重命名远程分支，推荐的做法是：1.删除远程待修改分支 2.push本地新分支名到远程
+  $ git branch -m dev2
+
+  # 删除本地分支
+  $ git branch -d <branchname>
+
+  # 删除远程分支
+  $ git branch -d -r <branchname>
+  $ git push origin :<branchname>
+  # OR
+  $ git branch
+  $ git push origin --delete dev2
+```
+
 ### git checkout 详解
 
 > 用于切换分支或恢复工作树文件。这条命令会重写工作区
@@ -784,7 +1179,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   # 切换 <branch> 分支
   $ git checkout <branch>
   # 从 <branch> 分支 提交中取出文件
-  $ git checkout <branch>  <fileName>  
+  $ git checkout <branch>  <fileName>
   # 从暂存区（index） 恢复文件
   $ git checkout <fileName>
 
@@ -798,9 +1193,6 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   # 换到newBranch的远程分
   $ git checkout -b newBranch  origin/newBranch
 
-
-  # 检出索引中的所有C源文件
-  $ git checkout -- '*.c'
   # 检出索引中的 fileName文件
   $ git checkout -- <fileName>
 
@@ -819,6 +1211,88 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
   # 将当前分支修改的内容一起打包带走，同步到切换的分支下 [切换到新分支后，当前分支修改过的内容就丢失了]
   $ git checkout --merge <branch>
+  $ git checkout -m <branch>
+```
+
+#### 例子
+
+```bash
+  #//取出master版本的head。
+  $ git checkout master
+  #//在当前分支上 取出 tag_name 的版本
+  $ git checkout tag_name
+  #//放弃当前对文件file_name的修改
+  $ git checkout  master file_name
+
+  #//取文件file_name的 在commit_id是的版本。commit_id为 git commit 时的sha值。
+  $ git checkout  commit_id file_name
+
+  # 从远程dev/1.5.4分支取得到本地分支/dev/1.5.4
+  $ git checkout -b dev/1.5.4 origin/dev/1.5.4
+
+  #这条命令把hello.rb从HEAD中签出.
+  $ git checkout -- hello.rb
+
+  # 检出索引中的所有C源文件
+  $ git checkout -- '*.c'
+
+  #这条命令把 当前目录所有修改的文件 从HEAD中签出并且把它恢复成未修改时的样子.
+  #注意：在使用 git checkout 时，如果其对应的文件被修改过，那么该修改会被覆盖掉。
+  $ git checkout .
+
+```
+
+### git reset 详解
+
+```bash
+  $ git reset [ –-soft | -–mixed | -–hard] <commit>
+  # git reset <commit> 的意思就是 把HEAD移到<commit>
+
+  # --soft 这个只是把 HEAD 指向的 commit 恢复到你指定的 commit，暂存区 工作区不变
+  # --hard 这个是 把 HEAD， 暂存区， 工作区 都修改为 你指定的 commit 的时候的文件状态
+  # --mixed 这个是不加时候的默认参数，把 HEAD，暂存区 修改为 你指定的 commit 的时候的文件状态，工作区保持不变
+
+  # 取消暂存区 部分文件（files 代表多个）的修改
+  $ git reset HEAD --< files >
+
+```
+
+### git cherry-pick 详解
+
+语法
+
+```bash
+
+  $ git cherry-pick [<options>] <commit-ish>...
+
+  # 常用options:
+  #   --quit                退出当前的chery-pick序列
+  #   --continue            继续当前的chery-pick序列
+  #   --abort               取消当前的chery-pick序列，恢复当前分支
+  #   -n, --no-commit       不自动提交
+  #   -e, --edit            编辑提交信息
+
+```
+
+### git submodule 详解
+
+> 命令用于初始化，更新或检查子模块
+
+```bash
+
+  $ git submodule status [--cached] [--recursive] [--] [<path>…​]
+
+  # 添加 子模块 路径为 相关信息保存在 .gitmodules 文件
+  $ git submodule add <url> [<path>]
+
+
+  # 初始化本地配置文件
+  $ git submodule init [--] [<path>…​]
+  # 检出父仓库列出的commit
+  $ git submodule update
+  # 使用组合指令
+  $ git submodule update --init --recursive
+
 ```
 
 ## git 原理
@@ -828,15 +1302,6 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 下面这个图展示了工作区、版本库中的暂存区和版本库之间的关系：
 
 ![image](https://www.runoob.com/wp-content/uploads/2015/02/1352126739_7909.jpg)
-
-### fast-forward [快进] 与 no-fast-forward
-
-> 如果是正常 push 到仓库，正确的完成 commit 更新，那么这次更新就是一个 fast-forward 更新,而如果不理会错误警告用本地更新强制覆盖仓库，就是一次 no-fast-forward 更新，很明显，no-fast-forward 更新会导致记录丢失
-
-具体阅读以下文章，感受下：
-
-- [git：到底什么是 fast-forwards](https://www.jianshu.com/p/86c44bef4ea1)
-- [图解 4 种 git 合并分支方法 - 颜海镜](https://yanhaijing.com/git/2017/07/14/four-method-for-git-merge/)
 
 ### git 文件目录
 
@@ -865,3 +1330,12 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
   blob 是tree下面具体文件 【与文件名无关具体到文件内容】
 ```
+
+## git 注意事项
+
+1. checkout reset 慎用
+2. 禁止向集成分支[多人使用分支] 执行 push -f [强制更新到远端 可能会导致远端所在分支回退很多版本]
+   > 如果单人自行分支，确认是要返回某个节点， 使用 push -f
+   > 公共分支修改 commit ： git reflog 命令查找历史，然后利用 git reset --hard [提交版本号|缺省] 的方式恢复
+3. 公共分支 禁止进行 rebase 变基操作
+   > 对于自己在本地的多次 commit，我想把他合并成一次 commit，还没有 push 的情况下,使用 rebase

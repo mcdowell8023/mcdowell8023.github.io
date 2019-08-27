@@ -147,7 +147,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
   # 删除远程分支
   $ git push origin --delete [branch-name]
-  $ git branch -dr [remote/branch]
+  $ git branch -d -r [remote/branch]
 
 ```
 
