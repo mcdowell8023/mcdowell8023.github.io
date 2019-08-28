@@ -1,14 +1,17 @@
-# 
+#
+
 <h1 align="center">mcdowell Blog Project</h1>
 基于 hexo 的博客项目
 
 ## 部署后地址：
+
 github :[https://mcdowell8023.github.io]
 coding :[https://mcdowell8023.coding.me]
 
 ## 说明：
-  - hexo : https://hexo.io/zh-cn/docs
-  - 主题 pure: https://github.com/cofess/hexo-theme-pure
+
+- hexo : https://hexo.io/zh-cn/docs
+- 主题 pure: https://github.com/cofess/hexo-theme-pure
 
 > 注： dev 分支是博客项目源码 master 分支 是源码编译后的文件[ 不可合并分支 ]
 
@@ -30,7 +33,7 @@ coding :[https://mcdowell8023.coding.me]
   - themes # 主题
     - landscape # 默认主题
     - pure # 第三方主题 现在使用的
-    ... 
+    ...
     - _config.yml # 主题中的配置文件
   - _config.pure.yml # 针对主题中的配置文件备份
   - _config.yml # 项目主要配置文件
@@ -45,7 +48,7 @@ coding :[https://mcdowell8023.coding.me]
 
   git checkout dev # 切换到dev[dev是博客源码]，master分支用hexo -d [用于部署编译后文件]
 
-  
+
   cd themes/pure/
   # git submodule init
   # git submodule update # 获取我的pure主题的配置
@@ -82,12 +85,12 @@ coding :[https://mcdowell8023.coding.me]
 ## 维护
 
 ### 新建文章
+
 ```
   hexo new [layout] <title>
   # eg: hexo new mylayout 'git常用命令'
-  
-```
 
+```
 
 ### 主题文件
 
