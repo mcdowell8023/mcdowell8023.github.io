@@ -7,108 +7,95 @@ categories:
 tags:
   - git
   - 笔记
-date: 2019-08-21 16:37:24
+date: 2019-08-28 16:37:24
 ---
 
-## 目录
+<!-- TOC -->
 
-[常见缩写](#bz)
+- [1. 安装 git](#1-%e5%ae%89%e8%a3%85-git)
+- [2. 初始化](#2-%e5%88%9d%e5%a7%8b%e5%8c%96)
+  - [2.1. 基本配置](#21-%e5%9f%ba%e6%9c%ac%e9%85%8d%e7%bd%ae)
+    - [2.1.1. 配置帐号信息](#211-%e9%85%8d%e7%bd%ae%e5%b8%90%e5%8f%b7%e4%bf%a1%e6%81%af)
+    - [2.1.2. 配置别名](#212-%e9%85%8d%e7%bd%ae%e5%88%ab%e5%90%8d)
+    - [2.1.3. 查看配置](#213-%e6%9f%a5%e7%9c%8b%e9%85%8d%e7%bd%ae)
+    - [2.1.4. 参数说明](#214-%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e)
+  - [2.2. 生成 shh 密钥](#22-%e7%94%9f%e6%88%90-shh-%e5%af%86%e9%92%a5)
+  - [2.3. 获取 Git 仓库](#23-%e8%8e%b7%e5%8f%96-git-%e4%bb%93%e5%ba%93)
+    - [2.3.1. 在现有目录中初始化仓库](#231-%e5%9c%a8%e7%8e%b0%e6%9c%89%e7%9b%ae%e5%bd%95%e4%b8%ad%e5%88%9d%e5%a7%8b%e5%8c%96%e4%bb%93%e5%ba%93)
+    - [2.3.2. 克隆现有的仓库](#232-%e5%85%8b%e9%9a%86%e7%8e%b0%e6%9c%89%e7%9a%84%e4%bb%93%e5%ba%93)
+    - [2.3.3. 本地已有构建的项目](#233-%e6%9c%ac%e5%9c%b0%e5%b7%b2%e6%9c%89%e6%9e%84%e5%bb%ba%e7%9a%84%e9%a1%b9%e7%9b%ae)
+  - [2.4. 不进行版本控制](#24-%e4%b8%8d%e8%bf%9b%e8%a1%8c%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6)
+    - [2.4.1. 添加不进行版本控制的文件目录](#241-%e6%b7%bb%e5%8a%a0%e4%b8%8d%e8%bf%9b%e8%a1%8c%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6%e7%9a%84%e6%96%87%e4%bb%b6%e7%9b%ae%e5%bd%95)
+    - [2.4.2. 提交 commit 后，想再忽略一些已经提交的文件](#242-%e6%8f%90%e4%ba%a4-commit-%e5%90%8e%e6%83%b3%e5%86%8d%e5%bf%bd%e7%95%a5%e4%b8%80%e4%ba%9b%e5%b7%b2%e7%bb%8f%e6%8f%90%e4%ba%a4%e7%9a%84%e6%96%87%e4%bb%b6)
+- [3. 常见操作](#3-%e5%b8%b8%e8%a7%81%e6%93%8d%e4%bd%9c)
+  - [3.1. 查看信息](#31-%e6%9f%a5%e7%9c%8b%e4%bf%a1%e6%81%af)
+    - [3.1.1. 查看帮助 git help](#311-%e6%9f%a5%e7%9c%8b%e5%b8%ae%e5%8a%a9-git-help)
+    - [3.1.2. 查看状态 git status](#312-%e6%9f%a5%e7%9c%8b%e7%8a%b6%e6%80%81-git-status)
+    - [3.1.3. 查看变化 git diff](#313-%e6%9f%a5%e7%9c%8b%e5%8f%98%e5%8c%96-git-diff)
+    - [3.1.4. 查看日志 git log](#314-%e6%9f%a5%e7%9c%8b%e6%97%a5%e5%bf%97-git-log)
+    - [3.1.5. 查看某个文件的版本历史 git show](#315-%e6%9f%a5%e7%9c%8b%e6%9f%90%e4%b8%aa%e6%96%87%e4%bb%b6%e7%9a%84%e7%89%88%e6%9c%ac%e5%8e%86%e5%8f%b2-git-show)
+    - [3.1.6. 图形化查看提交内容 gitk](#316-%e5%9b%be%e5%bd%a2%e5%8c%96%e6%9f%a5%e7%9c%8b%e6%8f%90%e4%ba%a4%e5%86%85%e5%ae%b9-gitk)
+  - [3.2. 更新](#32-%e6%9b%b4%e6%96%b0)
+  - [3.3. 文件重命名](#33-%e6%96%87%e4%bb%b6%e9%87%8d%e5%91%bd%e5%90%8d)
+  - [3.4. 文件删除](#34-%e6%96%87%e4%bb%b6%e5%88%a0%e9%99%a4)
+  - [3.5. 提交](#35-%e6%8f%90%e4%ba%a4)
+  - [3.6. 撤销&回滚](#36-%e6%92%a4%e9%94%80%e5%9b%9e%e6%bb%9a)
+    - [3.6.1. 简单总结](#361-%e7%ae%80%e5%8d%95%e6%80%bb%e7%bb%93)
+    - [3.6.2. 撤销](#362-%e6%92%a4%e9%94%80)
+      - [3.6.2.1. 修改文件 尚未提交](#3621-%e4%bf%ae%e6%94%b9%e6%96%87%e4%bb%b6-%e5%b0%9a%e6%9c%aa%e6%8f%90%e4%ba%a4)
+      - [3.6.2.2. 修改文件 已经提交（git commit）到 本地仓库](#3622-%e4%bf%ae%e6%94%b9%e6%96%87%e4%bb%b6-%e5%b7%b2%e7%bb%8f%e6%8f%90%e4%ba%a4git-commit%e5%88%b0-%e6%9c%ac%e5%9c%b0%e4%bb%93%e5%ba%93)
+    - [3.6.3. 回滚](#363-%e5%9b%9e%e6%bb%9a)
+      - [3.6.3.1. 还原 远端服务器 提交的代码](#3631-%e8%bf%98%e5%8e%9f-%e8%bf%9c%e7%ab%af%e6%9c%8d%e5%8a%a1%e5%99%a8-%e6%8f%90%e4%ba%a4%e7%9a%84%e4%bb%a3%e7%a0%81)
+      - [3.6.3.2. 删除最后一次远程提交](#3632-%e5%88%a0%e9%99%a4%e6%9c%80%e5%90%8e%e4%b8%80%e6%ac%a1%e8%bf%9c%e7%a8%8b%e6%8f%90%e4%ba%a4)
+      - [3.6.3.3. 回滚某次提交](#3633-%e5%9b%9e%e6%bb%9a%e6%9f%90%e6%ac%a1%e6%8f%90%e4%ba%a4)
+      - [3.6.3.4. 删除某次提交](#3634-%e5%88%a0%e9%99%a4%e6%9f%90%e6%ac%a1%e6%8f%90%e4%ba%a4)
+  - [3.7. 操作标签](#37-%e6%93%8d%e4%bd%9c%e6%a0%87%e7%ad%be)
+    - [3.7.1. 创建标签](#371-%e5%88%9b%e5%bb%ba%e6%a0%87%e7%ad%be)
+    - [3.7.2. 查看标签](#372-%e6%9f%a5%e7%9c%8b%e6%a0%87%e7%ad%be)
+    - [3.7.3. 删除标签](#373-%e5%88%a0%e9%99%a4%e6%a0%87%e7%ad%be)
+  - [3.8. 操作分支](#38-%e6%93%8d%e4%bd%9c%e5%88%86%e6%94%af)
+    - [3.8.1. 查看分支](#381-%e6%9f%a5%e7%9c%8b%e5%88%86%e6%94%af)
+    - [3.8.2. 新建分支](#382-%e6%96%b0%e5%bb%ba%e5%88%86%e6%94%af)
+    - [3.8.3. 提交到远程分支](#383-%e6%8f%90%e4%ba%a4%e5%88%b0%e8%bf%9c%e7%a8%8b%e5%88%86%e6%94%af)
+    - [3.8.4. 删除分支](#384-%e5%88%a0%e9%99%a4%e5%88%86%e6%94%af)
+    - [3.8.5. 合并分支](#385-%e5%90%88%e5%b9%b6%e5%88%86%e6%94%af)
+  - [3.9. 暂存](#39-%e6%9a%82%e5%ad%98)
+  - [3.10. 分离头【detached HEAD】](#310-%e5%88%86%e7%a6%bb%e5%a4%b4detached-head)
+  - [3.11. 操作子仓库](#311-%e6%93%8d%e4%bd%9c%e5%ad%90%e4%bb%93%e5%ba%93)
+- [4. 常用命令详解](#4-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4%e8%af%a6%e8%a7%a3)
+  - [4.1. git pull 详解](#41-git-pull-%e8%af%a6%e8%a7%a3)
+  - [4.2. git fetch 详解](#42-git-fetch-%e8%af%a6%e8%a7%a3)
+  - [4.3. git add 详解](#43-git-add-%e8%af%a6%e8%a7%a3)
+  - [4.4. git commit 详解](#44-git-commit-%e8%af%a6%e8%a7%a3)
+  - [4.5. git remote 详解](#45-git-remote-%e8%af%a6%e8%a7%a3)
+  - [4.6. git push 详解](#46-git-push-%e8%af%a6%e8%a7%a3)
+    - [4.6.1. 语法](#461-%e8%af%ad%e6%b3%95)
+    - [4.6.2. 示例](#462-%e7%a4%ba%e4%be%8b)
+      - [4.6.2.1. 完整示例](#4621-%e5%ae%8c%e6%95%b4%e7%a4%ba%e4%be%8b)
+      - [4.6.2.2. 本地分支名 缺省](#4622-%e6%9c%ac%e5%9c%b0%e5%88%86%e6%94%af%e5%90%8d-%e7%bc%ba%e7%9c%81)
+      - [4.6.2.3. 本地分支、远程分支都 缺省](#4623-%e6%9c%ac%e5%9c%b0%e5%88%86%e6%94%af%e8%bf%9c%e7%a8%8b%e5%88%86%e6%94%af%e9%83%bd-%e7%bc%ba%e7%9c%81)
+      - [4.6.2.4. 远程主机名、本地分支、远程分支都 缺省](#4624-%e8%bf%9c%e7%a8%8b%e4%b8%bb%e6%9c%ba%e5%90%8d%e6%9c%ac%e5%9c%b0%e5%88%86%e6%94%af%e8%bf%9c%e7%a8%8b%e5%88%86%e6%94%af%e9%83%bd-%e7%bc%ba%e7%9c%81)
+      - [4.6.2.5. simple 方式 和 matching 方式](#4625-simple-%e6%96%b9%e5%bc%8f-%e5%92%8c-matching-%e6%96%b9%e5%bc%8f)
+  - [4.7. git branch 详解](#47-git-branch-%e8%af%a6%e8%a7%a3)
+    - [4.7.1. 语法](#471-%e8%af%ad%e6%b3%95)
+    - [4.7.2. 示例](#472-%e7%a4%ba%e4%be%8b)
+  - [4.8. git checkout 详解](#48-git-checkout-%e8%af%a6%e8%a7%a3)
+    - [4.8.1. 例子](#481-%e4%be%8b%e5%ad%90)
+  - [4.9. git reset 详解](#49-git-reset-%e8%af%a6%e8%a7%a3)
+  - [4.10. git cherry-pick 详解](#410-git-cherry-pick-%e8%af%a6%e8%a7%a3)
+  - [4.11. git submodule 详解](#411-git-submodule-%e8%af%a6%e8%a7%a3)
+- [5. git 原理](#5-git-%e5%8e%9f%e7%90%86)
+  - [5.1. git 工作解析图](#51-git-%e5%b7%a5%e4%bd%9c%e8%a7%a3%e6%9e%90%e5%9b%be)
+  - [5.2. git 文件目录](#52-git-%e6%96%87%e4%bb%b6%e7%9b%ae%e5%bd%95)
+    - [5.2.1. commit 与 tree 和 blob 的关系](#521-commit-%e4%b8%8e-tree-%e5%92%8c-blob-%e7%9a%84%e5%85%b3%e7%b3%bb)
+  - [5.3. git 注意事项](#53-git-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9)
+  - [5.4. 常见缩写](#54-%e5%b8%b8%e8%a7%81%e7%bc%a9%e5%86%99)
 
-[0.安装 git](#0)
+<!-- /TOC -->
 
-[1.初始化](#1初始化)
-&nbsp; &nbsp; [1.1基本配置](#11)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.1.1配置帐号信息](#111配置帐号信息)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.1.2 配置别名](#112)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.1.3 查看配置](#113)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.1.4 参数说明](#114)
-&nbsp; &nbsp; [1.2 生成 shh 密钥](#1.2)
-&nbsp; &nbsp; [1.3 获取 Git 仓库](#1.3)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.3.1 在现有目录中初始化仓库](#1.3.1)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.3.2 克隆现有的仓库](#1.3.2)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.3.3 本地已有构建的项目](#1.3.3)
-&nbsp; &nbsp; [1.4 不进行版本控制](#1.4)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.4.1 添加不进行版本控制的文件目录](#1.4.1)
-&nbsp; &nbsp; &nbsp; &nbsp; [1.4.2 提交 commit 后，想再忽略一些已经提交的文件](#1.4.2)
+---
 
-[2. 常见操作](#2)
-&nbsp; &nbsp; [2.1 查看信息](#2.1)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.1.1 查看帮助 [ git help ]](#2.1.1)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.1.2 查看状态 [ git status ]](#2.1.2)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.1.3 查看变化 [ git diff ]](#2.1.3)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.1.4 查看日志 [ git log ]](#2.1.4)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.1.5 查看某个文件的版本历史 [ git show ]](#2.1.5)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.1.6 图形化查看提交内容 [ gitk ]](#2.1.6)
-&nbsp; &nbsp; [2.2 更新](#2.2)
-&nbsp; &nbsp; [2.3 文件重命名](#2.3)
-&nbsp; &nbsp; [2.4 文件删除](#2.4)
-&nbsp; &nbsp; [2.5 提交](#2.5)
-&nbsp; &nbsp; [2.6 撤销&回滚](#2.6)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.6.1 简单总结](#2.6.1)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.6.2 撤销](#2.6.2)
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.2.1 修改文件 尚未提交](#2.6.2.1)
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.2.2 修改文件 已经提交（git commit）到 本地仓库](#2.6.2.2)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.6.3 回滚](#常见缩写)
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.1 还原 远端服务器 提交的代码](#2.6.3.1)
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.2 删除最后一次远程提交](#2.6.3.2)
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.3 回滚某次提交](#2.6.3.3)
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2.6.3.4 删除某次提交](#2.6.3.4)
-&nbsp; &nbsp; [2.7 操作标签](#2.7)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.7.1 创建标签](#2.7.1)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.7.2 查看标签](#2.7.2)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.7.3 删除标签](#2.7.3)
-&nbsp; &nbsp; [2.8 操作分支](#2.8)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.8.1 查看分支](#2.8.1)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.8.2 新建分支](#2.8.2)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.8.3 提交到远程分支](#2.8.3)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.8.4 删除分支](#2.8.4)
-&nbsp; &nbsp; &nbsp; &nbsp; [2.8.5 合并分支](#2.8.5)
-&nbsp; &nbsp; [2.9 暂存](#2.9)
-&nbsp; &nbsp; [2.10 分离头【detached HEAD】](#2.10)
-&nbsp; &nbsp; [2.11 操作子仓库](#2.11)
-
-[3. 常用命令详解](#常用命令详解)
-&nbsp; &nbsp; [3.1 git pull 详解](#3.1)
-&nbsp; &nbsp; [3.2 git fetch 详解](#3.2)
-&nbsp; &nbsp; [3.3 git add 详解](#3.3)
-&nbsp; &nbsp; [3.4 git commit 详解](#3.4)
-&nbsp; &nbsp; [3.5 git remote 详解](#3.5)
-&nbsp; &nbsp; [3.6 git push 详解](#3.6)
-&nbsp; &nbsp; [3.7 git branch 详解](#3.7)
-&nbsp; &nbsp; [3.8 git checkout 详解](#3.8)
-&nbsp; &nbsp; [3.9 git reset 详解](#3.9)
-&nbsp; &nbsp; [3.10 git cherry-pick 详解](#3.10)
-&nbsp; &nbsp; [3.11 git submodule 详解](#3.11)
-
-[4. git 原理](#4)
-&nbsp; &nbsp; [4.1 git 工作解析图](#4.1)
-&nbsp; &nbsp; [4.2 git 文件目录 ](#4.2)
-&nbsp; &nbsp; [4.3 commit 与 tree 和 blob 的关系 ](#4.3)
-
-[5. git 注意事项 ](#5)
-
-## 常见缩写
-
-<span id="#bz"></span>
-
-```bash
-
-  -d  --delete：删除
-
-  -D  --delete --force的快捷键
-
-  -f  --force：强制
-
-  -m  --move：移动或重命名
-
-  -M  --move --force的快捷键
-
-  -r  --remote：远程
-
-  -a  --all：所有
-```
-
-## 0.安装 git
+# 1. 安装 git
 
 > 已有？请跳过
 
@@ -120,11 +107,13 @@ date: 2019-08-21 16:37:24
   git --version
 ```
 
-## 1.初始化
+---
 
-### 1.1 基本配置
+# 2. 初始化
 
-#### 1.1.1配置帐号信息
+## 2.1. 基本配置
+
+### 2.1.1. 配置帐号信息
 
 ```bash
   # 设置 [本仓库 | 全局 | 系统 ] 的 用户名称
@@ -135,7 +124,7 @@ date: 2019-08-21 16:37:24
 
 > 当然你也可以通过修改 .git 文件目录下面的 config 文件进行修改
 
-#### 1.1.2 配置别名
+### 2.1.2. 配置别名
 
 ```bash
   # 配置别名
@@ -146,7 +135,7 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 1.1.3 查看配置
+### 2.1.3. 查看配置
 
 ```bash
   # 查看配置
@@ -156,7 +145,7 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 1.1.4 参数说明
+### 2.1.4. 参数说明
 
 - local：区域为本仓库
 - global: 当前用户的所有仓库
@@ -165,7 +154,7 @@ date: 2019-08-21 16:37:24
 > 缺省等同于 local
 > 优先级：local > global > system
 
-### 1.2 生成 shh 密钥
+## 2.2. 生成 shh 密钥
 
 > 如果你想通过 https 的方式 每次提交输入密码，当然可以跳过此节
 
@@ -197,9 +186,9 @@ date: 2019-08-21 16:37:24
 
 > 如果公司是自己搭建的 git 服务（未使用 gitlab），则交给管理员添加。如果使用 gitlab 在设置增加密钥
 
-### 1.3 获取 Git 仓库
+## 2.3. 获取 Git 仓库
 
-#### 1.3.1 在现有目录中初始化仓库
+### 2.3.1. 在现有目录中初始化仓库
 
 ```bash
   # 初始化本地仓库 缺省 为当前目录
@@ -217,7 +206,7 @@ date: 2019-08-21 16:37:24
   $ git push -u origin master
 ```
 
-#### 1.3.2 克隆现有的仓库
+### 2.3.2. 克隆现有的仓库
 
 ```bash
   # 克隆远程仓库到本地  fileName 的文件夹内 【缺省-默认远端名称】
@@ -229,7 +218,7 @@ date: 2019-08-21 16:37:24
 
 > 从裸仓库 clone 下来的本地仓库可以进行正常的 push 操作， 但是从一般仓库 clone 下来的本地仓库却不行。 这也正是裸仓库存在的意义。 裸仓库一般情况下是作为远端的中心仓库而存在的。
 
-#### 1.3.3 本地已有构建的项目
+### 2.3.3. 本地已有构建的项目
 
 ```bash
   $ git remote -v #查看远程版本库信息
@@ -242,9 +231,9 @@ date: 2019-08-21 16:37:24
   $ git push github #推送同步到github仓库
 ```
 
-### 1.4 不进行版本控制
+## 2.4. 不进行版本控制
 
-#### 1.4.1 添加不进行版本控制的文件目录
+### 2.4.1. 添加不进行版本控制的文件目录
 
 > 项目目录下 新建 .gitignore 文件 ，写入不需要进行版本控制的文件名或文件夹
 
@@ -266,16 +255,18 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 1.4.2 提交 commit 后，想再忽略一些已经提交的文件
+### 2.4.2. 提交 commit 后，想再忽略一些已经提交的文件
 
 1. 把忽略的文件添加到 .gitignore;
 2. 通过 git rm -- cached < file > 的方式删除掉 git 仓库里面无需跟踪的文件。
 
-## 2. 常见操作
+---
 
-### 2.1 查看信息
+# 3. 常见操作
 
-#### 2.1.1 查看帮助 [ git help ]
+## 3.1. 查看信息
+
+### 3.1.1. 查看帮助 git help
 
 ```bash
     # 所有可用的命令都将打印在标准输出上
@@ -288,7 +279,7 @@ date: 2019-08-21 16:37:24
     $ git help git
 ```
 
-#### 2.1.2 查看状态 [ git status ]
+### 3.1.2. 查看状态 git status
 
 > git status 命令用于显示工作目录和暂存区的状态。git status 不显示已经 commit 到项目历史中去的信息。看项目历史的信息要使用 git log
 
@@ -304,7 +295,7 @@ date: 2019-08-21 16:37:24
   $ git status -s # or $ git status --short
 ```
 
-#### 2.1.3 查看变化 [ git diff ]
+### 3.1.3. 查看变化 git diff
 
 > 对比 修改之后还没有暂存起来的内容变化
 
@@ -354,7 +345,7 @@ date: 2019-08-21 16:37:24
 3.  ^是~都是父节点，区别是跟随数字时候，^2 是第二个父节点，而~2 是父节点的父节点
 4.  ^和~可以组合使用,例如 HEAD~2^2
 
-#### 2.1.4 查看日志 [ git log ]
+### 3.1.4. 查看日志 git log
 
 ```bash
   # 查看所有分支的历史 git log 等同于它
@@ -374,7 +365,7 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 2.1.5 查看某个文件的版本历史 [ git show ]
+### 3.1.5. 查看某个文件的版本历史 git show
 
 ```bash
     // 先查看文件提交历史
@@ -383,7 +374,7 @@ date: 2019-08-21 16:37:24
     git show [版本号] // 显示具体的某次的改动的修改
 ```
 
-#### 2.1.6 图形化查看提交内容 [ gitk ]
+### 3.1.6. 图形化查看提交内容 gitk
 
 ```bash
     # 在当前目录下输入，弹出图形化界面
@@ -394,7 +385,7 @@ date: 2019-08-21 16:37:24
 
 > 定制化图形界面 ： view --> new view [勾选 all refs] # 显示全部分支
 
-### 2.2 更新
+## 3.2. 更新
 
 - 使用 git pull 进行更新
 
@@ -418,7 +409,7 @@ date: 2019-08-21 16:37:24
   $ git merge origin/master
 ```
 
-### 2.3 文件重命名
+## 3.3. 文件重命名
 
 - 先删除文件再添加文件
 
@@ -448,7 +439,7 @@ date: 2019-08-21 16:37:24
   $ git reflog
 ```
 
-### 文件删除
+## 3.4. 文件删除
 
 - 先删除文件再添加文件
 
@@ -469,7 +460,7 @@ date: 2019-08-21 16:37:24
 
 > 如果删除出错 借助 git reset --hard 进行撤销
 
-### 提交
+## 3.5. 提交
 
 ```bash
   # 添加新文件
@@ -495,17 +486,17 @@ date: 2019-08-21 16:37:24
 
 ```
 
-### 撤销&回滚
+## 3.6. 撤销&回滚
 
-#### 简单总结
+### 3.6.1. 简单总结
 
 1. 修改了工作区，恢复：git checkout
 2. add 后，想撤销： git reset HEAD
 3. commit 后，想撤销： git reset --hard [需要回退的 commit id]
 
-#### 撤销
+### 3.6.2. 撤销
 
-##### 修改文件 尚未提交
+#### 3.6.2.1. 修改文件 尚未提交
 
 - 未执行 git add 操作
 
@@ -538,7 +529,7 @@ date: 2019-08-21 16:37:24
   $ git reset HEAD <filename>
 ```
 
-##### 修改文件 已经提交（git commit）到 本地仓库
+#### 3.6.2.2. 修改文件 已经提交（git commit）到 本地仓库
 
 - 修改 git commit 不再产生新的 Commit[ 只能修改最近一次 ]
 
@@ -568,12 +559,12 @@ date: 2019-08-21 16:37:24
   $ git reset --hard [commit]
 ```
 
-#### 回滚
+### 3.6.3. 回滚
 
 > 已进行 git push，即已推送到“远程仓库”中。我们将已被提交到“远程仓库”的代码还原操作叫做“回滚”！
 > 注意：对远程仓库做回滚操作是有风险的，需提前做好备份和通知其他团队成员！
 
-##### 还原 远端服务器 提交的代码
+#### 3.6.3.1. 还原 远端服务器 提交的代码
 
 ```bash
   # 根据 tag 还原工作区代码
@@ -583,7 +574,7 @@ date: 2019-08-21 16:37:24
   $ git checkout <commitID> <filename>
 ```
 
-##### 删除最后一次远程提交
+#### 3.6.3.2. 删除最后一次远程提交
 
 - 使用 revert
 
@@ -608,7 +599,7 @@ date: 2019-08-21 16:37:24
 > revert 是放弃指定提交的修改，但是会生成一次新的提交，需要填写提交注释，以前的历史记录都在；
 > reset 是指将 HEAD 指针指到指定提交，历史记录中不会出现放弃的提交记录。
 
-##### 回滚某次提交
+#### 3.6.3.3. 回滚某次提交
 
 ```bash
   # 找到要回滚的 commitID
@@ -617,7 +608,7 @@ date: 2019-08-21 16:37:24
   $ git revert commitID
 ```
 
-##### 删除某次提交
+#### 3.6.3.4. 删除某次提交
 
 ```bash
   # 找到要回滚的 commitID
@@ -640,11 +631,11 @@ date: 2019-08-21 16:37:24
 [Deleting a Git commit](https://www.jianshu.com/p/073acdc79c7b)
 [在 Git 中，如何『删除』commit？](https://blog.csdn.net/u013553529/article/details/88087047)
 
-### 操作标签
+## 3.7. 操作标签
 
 > 标签操作允许为存储库中的特定版本提供有意义的名称。
 
-#### 创建标签
+### 3.7.1. 创建标签
 
 ```bash
   # 创建标签
@@ -659,7 +650,7 @@ date: 2019-08-21 16:37:24
   $ git push origin --tags
 ```
 
-#### 查看标签
+### 3.7.2. 查看标签
 
 ```bash
   $ git tag
@@ -670,7 +661,7 @@ date: 2019-08-21 16:37:24
   $ git show tagName
 ```
 
-#### 删除标签
+### 3.7.3. 删除标签
 
 ```bash
   # 查看 所有可用的标签
@@ -686,9 +677,9 @@ date: 2019-08-21 16:37:24
   $ git push origin :refs/tags/标签名
 ```
 
-### 操作分支
+## 3.8. 操作分支
 
-#### 查看分支
+### 3.8.1. 查看分支
 
 ```bash
   # 查看分支
@@ -697,7 +688,7 @@ date: 2019-08-21 16:37:24
   $ git branch -av
 ```
 
-#### 新建分支
+### 3.8.2. 新建分支
 
 ```bash
   # 新建一个名字为 dev2 的分支 (不切换到新分支)
@@ -719,7 +710,7 @@ date: 2019-08-21 16:37:24
   # git checkout <branchname>
 ```
 
-#### 提交到远程分支
+### 3.8.3. 提交到远程分支
 
 ```bash
   $ git push [origin] <分支名称>:<分支名称>
@@ -736,7 +727,7 @@ date: 2019-08-21 16:37:24
 
 > [origin] 代指 添加远程裸仓库地址时候，创建的名称
 
-#### 删除分支
+### 3.8.4. 删除分支
 
 ```bash
   #  删除分支 -d是删除  -D 是强制删除
@@ -751,7 +742,7 @@ date: 2019-08-21 16:37:24
 
 ```
 
-#### 合并分支
+### 3.8.5. 合并分支
 
 fast-forward
 
@@ -807,7 +798,7 @@ fast-forward
 > 当执行完 cherry-pick 以后，将会 生成一个新的提交；这个新的提交的哈希值和原来的不同，但标识名 一样；
 > [图解 4 种 git 合并分支方法](https://yanhaijing.com/git/2017/07/14/four-method-for-git-merge/) > [git cherry-pick 的使用](https://blog.csdn.net/FightFightFight/article/details/81039050)
 
-### 暂存
+## 3.9. 暂存
 
 当收到紧急任务，手里又存在未完成的模块可以先放到暂存区
 
@@ -823,7 +814,7 @@ fast-forward
 
 ```
 
-### 分离头【detached HEAD】
+## 3.10. 分离头【detached HEAD】
 
 执行 git checkout [commit 版本号] ，git 会提示显示处于分离头（**无分支状态**），在此状态下，进行的提交操作不挂到在分支下，直接切换分支，会导致分离头的提交丢失。
 
@@ -851,7 +842,7 @@ fast-forward
     git checkout -b 本地分支名x origin/远程分支名x // 基于 远端分支 建立 本地分支（远程分支名x） 采用此种方法建立的本地分支会和远程分支建立映射关系
 ```
 
-### 操作子仓库
+## 3.11. 操作子仓库
 
 ```bash
   # 添加子仓库
@@ -877,9 +868,11 @@ fast-forward
 
 [git submodule 使用小结](https://www.jianshu.com/p/f8a55b972972)
 
-## 常用命令详解
+---
 
-### git pull 详解
+# 4. 常用命令详解
+
+## 4.1. git pull 详解
 
 > git pull 相当于从远程获取最新版本并 merge 到本地
 
@@ -900,7 +893,7 @@ git pull 详解
   # options : –ff-only
 ```
 
-### git fetch 详解
+## 4.2. git fetch 详解
 
 > git fetch 相当于是从远程获取最新到本地，不会自动 merge
 > 在实际使用中，git fetch 更安全一些
@@ -931,7 +924,7 @@ OR
 
 > git pull = git fetch + git merge
 
-### git add 详解
+## 4.3. git add 详解
 
 > 将修改添加到暂存区
 
@@ -955,7 +948,7 @@ OR
 
 ```
 
-### git commit 详解
+## 4.4. git commit 详解
 
 > 用于将更改记录(提交)到存储库
 
@@ -976,7 +969,7 @@ OR
 
 ```
 
-### git remote 详解
+## 4.5. git remote 详解
 
 > git remote 命令管理一组跟踪的存储库
 
@@ -1014,11 +1007,11 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-### git push 详解
+## 4.6. git push 详解
 
 > 将修改添加到暂存区
 
-#### 语法
+### 4.6.1. 语法
 
 ```bash
   # 命令用于将本地分支的更新，推送到远程主机。与git pull命令相似。
@@ -1026,11 +1019,11 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-#### 示例
+### 4.6.2. 示例
 
 > origin 可通过 .git config 查看地址
 
-##### 完整示例
+#### 4.6.2.1. 完整示例
 
 ```bash
   # 将本地的master分支推送到origin主机的master分支。如果master不存在，则会被新建。
@@ -1038,7 +1031,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-##### 本地分支名 缺省
+#### 4.6.2.2. 本地分支名 缺省
 
 表示**删除指定的远程分支**，因为这等同于推送一个空的本地分支到远程分支。
 
@@ -1049,7 +1042,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   $ git push origin --delete master
 ```
 
-##### 本地分支、远程分支都 缺省
+#### 4.6.2.3. 本地分支、远程分支都 缺省
 
 表示推送**特定主机的对应分支**简写方式：如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略。
 
@@ -1058,7 +1051,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   $ git push origin
 ```
 
-##### 远程主机名、本地分支、远程分支都 缺省
+#### 4.6.2.4. 远程主机名、本地分支、远程分支都 缺省
 
 表示推送**origin 主机的对应分支**简写方式：如果当前分支只有一个追踪分支，那么主机名都可以省略。
 
@@ -1075,7 +1068,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   $ git push -u origin master
 ```
 
-##### simple 方式 和 matching 方式
+#### 4.6.2.5. simple 方式 和 matching 方式
 
 > 不带任何参数的 git push，默认只推送当前分支，这叫做 simple 方式
 > matching 方式，会推送所有有对应的远程分支的本地分支
@@ -1118,11 +1111,11 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-### git branch 详解
+## 4.7. git branch 详解
 
 > 用于列出，创建或删除分支
 
-#### 语法
+### 4.7.1. 语法
 
 ```bash
 
@@ -1141,7 +1134,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 > 使用-d 在删除前 Git 会判断在该分支上开发的功能是否被 merge 的其它分支。如果没有，不能删除。如果 merge 到其它分支，但之后又在其上做了开发，使用-d 还是不能删除。-D 会强制删除
 
-#### 示例
+### 4.7.2. 示例
 
 ```bash
   # 查看分支
@@ -1171,7 +1164,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   $ git push origin --delete dev2
 ```
 
-### git checkout 详解
+## 4.8. git checkout 详解
 
 > 用于切换分支或恢复工作树文件。这条命令会重写工作区
 
@@ -1214,7 +1207,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   $ git checkout -m <branch>
 ```
 
-#### 例子
+### 4.8.1. 例子
 
 ```bash
   #//取出master版本的head。
@@ -1242,7 +1235,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-### git reset 详解
+## 4.9. git reset 详解
 
 ```bash
   $ git reset [ –-soft | -–mixed | -–hard] <commit>
@@ -1257,7 +1250,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-### git cherry-pick 详解
+## 4.10. git cherry-pick 详解
 
 语法
 
@@ -1274,7 +1267,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-### git submodule 详解
+## 4.11. git submodule 详解
 
 > 命令用于初始化，更新或检查子模块
 
@@ -1295,15 +1288,17 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
 
 ```
 
-## git 原理
+---
 
-### git 工作解析图
+# 5. git 原理
+
+## 5.1. git 工作解析图
 
 下面这个图展示了工作区、版本库中的暂存区和版本库之间的关系：
 
 ![image](https://www.runoob.com/wp-content/uploads/2015/02/1352126739_7909.jpg)
 
-### git 文件目录
+## 5.2. git 文件目录
 
 - COMMIT_EDITMSG
 - config 当前 git 的配置文件
@@ -1319,7 +1314,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   • heads （存放当前项目的所有分支）
   • tags (存放的当前项目的所有标签，又叫做里程碑)
 
-#### commit 与 tree 和 blob 的关系
+### 5.2.1. commit 与 tree 和 blob 的关系
 
 [![关系图谱](https://s2.ax1x.com/2019/04/23/EAtpLR.th.png)](https://imgchr.com/i/EAtpLR)
 
@@ -1331,7 +1326,7 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
   blob 是tree下面具体文件 【与文件名无关具体到文件内容】
 ```
 
-## git 注意事项
+## 5.3. git 注意事项
 
 1. checkout reset 慎用
 2. 禁止向集成分支[多人使用分支] 执行 push -f [强制更新到远端 可能会导致远端所在分支回退很多版本]
@@ -1339,3 +1334,22 @@ $ git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
    > 公共分支修改 commit ： git reflog 命令查找历史，然后利用 git reset --hard [提交版本号|缺省] 的方式恢复
 3. 公共分支 禁止进行 rebase 变基操作
    > 对于自己在本地的多次 commit，我想把他合并成一次 commit，还没有 push 的情况下,使用 rebase
+
+## 5.4. 常见缩写
+
+```bash
+
+  -d  --delete：删除
+
+  -D  --delete --force的快捷键
+
+  -f  --force：强制
+
+  -m  --move：移动或重命名
+
+  -M  --move --force的快捷键
+
+  -r  --remote：远程
+
+  -a  --all：所有
+```
