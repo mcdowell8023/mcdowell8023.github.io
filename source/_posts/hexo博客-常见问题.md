@@ -8,7 +8,7 @@ tags:
 date: 2019-07-18 00:15:05
 ---
 
-## 博客在 github 访问访问慢？
+## .1. 博客在 github 访问访问慢？
 
 > 在 coding page 上部署实现国内外分流
 
@@ -32,10 +32,12 @@ date: 2019-07-18 00:15:05
 ```
 
 5. coding 控制台 开启 pages
+6. 菜单目录中 -> 代码 pages 服务
 
-> 菜单目录中 -> 代码 pages 服务
+> 注意：本地电脑之前 没有与 远端托管服务器[ github、coding等 ] 建立过ssh连接，部署会报错[ 即使已经在远端配置好了ssh公钥 ]。
+> 可以先用本地电脑与远端进行 ssh -T git@github.com 进行测试 或者 项目克隆。
 
-## 第三方主题 没有办法上传到自己的项目中？
+## .2. 第三方主题 没有办法上传到自己的项目中？
 
 在使用第三方主题的时候，难免要对主题进行微调。但是调整后的主题文件 是无法上传上去的。这时候，你换台电脑来写博客，就还得再来一遍。【别问我，我是怎么知道的 😂】
 
@@ -57,15 +59,19 @@ date: 2019-07-18 00:15:05
   ```
 
 - 添加 submodlue
-  ```bash
-    git submodule add < for后的主题仓库地址 > themes/< 主题目录 >
-  ```
-  > 当前工程根路径下生成一个名为“.gitmodules”的文件
-  ```bash
-    [submodule "themes/主题"]
-    path = themes/主题
-    url = https://github.com/wuchong/jacman.git # 主题地址
-  ```
+  
+```bash
+  git submodule add < for后的主题仓库地址 > themes/< 主题目录 >
+```
+
+> 当前工程根路径下生成一个名为“.gitmodules”的文件
+
+```bash
+  [submodule "themes/主题"]
+  path = themes/主题
+  url = https://github.com/wuchong/jacman.git # 主题地址
+```
+
 - 单独提交修改后的主题【这是你还原主题更改的好时候】
 
   ```bash
@@ -79,13 +85,16 @@ date: 2019-07-18 00:15:05
 - 然后返回博客项目根目录 进行正常提交就好
 
 - 在新电脑上 clone 后 npm install 之前要去下载 主题
-  ```bash
-    cd themes/< 主题目录 >
-    git submodule init
-    git submodule update //获取我的NexT主题的配
-  ```
 
-## 关于博客版本管理
+```bash
+  cd themes/< 主题目录 >
+  git submodule init
+  git submodule update # 获取我的主题的配置
+```
+
+> 注意：一定要切换到对应分支【 同时注意更新下来的版本 】
+
+## .3. 关于博客版本管理
 
 关于 hexo 博客的机制是这样的：由于 hexo d 上传部署到 github 的 pages 服务其实是 hexo 编译后的文件，是用来生成网页的，不包含源文件。
 
@@ -111,10 +120,10 @@ date: 2019-07-18 00:15:05
 
 > 记得 fetch,pull,push 的时候 一定要 带着分支
 
-### 相关连接
+### .3.1. 相关连接
 
 [基于 Hexo 的博客同步中的一些问题](https://blog.csdn.net/u010873775/article/details/71303116)
 
-### 相关文章
+### .3.2. 相关文章
 
 - {% post_link hexo博客-建站 %}
