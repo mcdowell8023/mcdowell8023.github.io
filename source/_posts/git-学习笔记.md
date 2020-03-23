@@ -260,7 +260,9 @@ date: 2019-08-28 16:37:24
 ### 提交 commit 后，想再忽略一些已经提交的文件
 
 1. 把忽略的文件添加到 .gitignore;
-2. 通过 `git rm -- cached < file > `的方式删除掉 git 仓库里面无需跟踪的文件。
+2. 通过 `git rm --cached < file > `的方式删除掉 git 仓库里面无需跟踪的文件。
+
+> 你需要确认 的 云端源 也要删除
 3. `git commit -m 'delete git remote somefile'`
 4. `git push`
 
