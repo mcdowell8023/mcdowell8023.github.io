@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://mcdowell8023.github.io/"/>
-  <updated>2019-10-28T12:37:23.838Z</updated>
+  <updated>2020-03-23T05:57:56.900Z</updated>
   <id>http://mcdowell8023.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue项目调整兼容IE8+</title>
+    <link href="http://mcdowell8023.github.io/2019/11/28/vue%E9%A1%B9%E7%9B%AE%E8%B0%83%E6%95%B4%E5%85%BC%E5%AE%B9IE8+/"/>
+    <id>http://mcdowell8023.github.io/2019/11/28/vue项目调整兼容IE8+/</id>
+    <published>2019-11-28T06:29:00.000Z</published>
+    <updated>2020-03-23T05:57:56.900Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- build time:Mon Mar 23 2020 13:59:53 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;记一次vue项目调整兼容ie8&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#记一次vue项目调整兼容ie
+      
+    
+    </summary>
+    
+      <category term="技术帖" scheme="http://mcdowell8023.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B8%96/"/>
+    
+    
+      <category term="兼容IE" scheme="http://mcdowell8023.github.io/tags/%E5%85%BC%E5%AE%B9IE/"/>
+    
+      <category term="vue" scheme="http://mcdowell8023.github.io/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker笔记(一)</title>
