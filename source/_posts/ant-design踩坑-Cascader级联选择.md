@@ -3,7 +3,7 @@ title: 'ant-design踩坑：Cascader级联选择'
 comments: true
 mathjax: true
 categories:
-  - 技术帖
+  - 踩坑
 tags:
   - ant-design
   - 踩坑

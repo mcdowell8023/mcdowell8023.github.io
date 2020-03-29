@@ -3,11 +3,12 @@ title: git常用命令
 comments: true
 mathjax: true
 categories:
-  - 技术帖
+  - 工具
 tags:
   - git
   - 命令
   - 速查
+  - 笔记
 date: 2019-08-21 11:23:21
 ---
 
@@ -17,10 +18,10 @@ date: 2019-08-21 11:23:21
 
 ### 说明
 
->Workspace：工作区
->Index / Stage：暂存区
->Repository：仓库区（或本地仓库）
->Remote：远程仓库
+> Workspace：工作区
+> Index / Stage：暂存区
+> Repository：仓库区（或本地仓库）
+> Remote：远程仓库
 
 #### 一、新建代码库
 
@@ -36,6 +37,7 @@ date: 2019-08-21 11:23:21
 ```
 
 #### 二、配置
+
 Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。
 
 ```bash
@@ -356,7 +358,7 @@ Git 的设置文件为.gitconfig，它可以在用户主目录下（全局配置
 
   # 恢复的同时直接删除stash内容
   $ git stash pop
-  
+
   # 恢复指定的工作现场，当你保存了不只一份工作现场时
   $ git stash apply stash@{0}
 
