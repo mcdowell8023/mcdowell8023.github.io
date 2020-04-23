@@ -82,10 +82,10 @@ deploy:
   # repo: https://github.com/mcdowell8023/mcdowellblog.git
   # repo: git@github.com:mcdowell8023/mcdowell8023.github.io.git
   # branch: master
-  repo: 
+  repo:
     github: git@github.com:mcdowell8023/mcdowell8023.github.io.git,master
     coding: git@git.dev.tencent.com:mcdowell8023/mcdowell8023.git,master
-  
+    gitee: git@gitee.com:mcdowell8023/mcdowell8023.git,master
 
 ## feed 订阅 rss
 feed:
@@ -105,7 +105,7 @@ baidusitemap:
 neat_enable: true
 neat_html:
   enable: true
-  exclude:  
+  exclude:
 neat_css:
   enable: true
   exclude:
@@ -116,7 +116,7 @@ neat_js:
   output:
   compress:
   exclude:
-    - '*.min.js' 
+    - '*.min.js'
 # 使用 新模版引擎 解决数学公式问题
 markdown_it_plus:
   highlight: true
@@ -133,7 +133,7 @@ markdown_it_plus:
         enable: true
     - plugin:
         name: markdown-it-mark
-        enable: false  
+        enable: false
 ### 文章启用mathjax
 #```
 #title: Hello World

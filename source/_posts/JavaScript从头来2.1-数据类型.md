@@ -1,5 +1,5 @@
 ---
-title: JavaScript从头来-数据类型
+title: JavaScript从头来2.1-数据类型
 comments: true
 mathjax: true
 categories:
