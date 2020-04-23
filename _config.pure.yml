@@ -210,7 +210,8 @@ profile:
       # facebook: /
       # dribbble: /
       # behance: https://www.behance.net/cofess
-      coding: https://mcdowell8023.coding.me
+      # coding: https://mcdowell8023.coding.me
+      coding: https://mcdowell8023.gitee.io/
       rss: atom.xml
     link_tooltip: true # enable the social link tooltip, options: true, false
   # My Skills
