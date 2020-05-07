@@ -85,10 +85,14 @@ scrcpy.exe -s 10.0.1.158:5555 -m 720
 ## 安卓手机连接命令
 
 ```shell
-  // 进入对象ip 手机 shell 命令
+  # 进入对象ip 手机 shell 命令
   adb -s 10.0.1.50 shell
   # 进入 adb shell 命令
-  // 查看手机日志
+  # 查看手机日志
   logcat ｜ grep 'TAG'
   # 过滤 TAG 日志
+
+  # 安装apk 需要 打开 允许usb 安装
+  adb install -r <apk路径>
+
 ```
