@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://mcdowell8023.github.io/"/>
-  <updated>2020-04-23T02:11:22.410Z</updated>
+  <updated>2020-05-22T02:06:30.990Z</updated>
   <id>http://mcdowell8023.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>透视http协议笔记</title>
+    <link href="http://mcdowell8023.github.io/2020/05/22/%E9%80%8F%E8%A7%86http%E5%8D%8F%E8%AE%AE%E7%AC%94%E8%AE%B01/"/>
+    <id>http://mcdowell8023.github.io/2020/05/22/透视http协议笔记1/</id>
+    <published>2020-05-22T00:25:58.000Z</published>
+    <updated>2020-05-22T02:06:30.990Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- build time:Fri May 22 2020 10:07:51 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;http-的前世今生&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#http-的前世今生&quot;&gt;&lt;/a&gt; HT
+      
+    
+    </summary>
+    
+      <category term="基础" scheme="http://mcdowell8023.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="笔记" scheme="http://mcdowell8023.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="http" scheme="http://mcdowell8023.github.io/tags/http/"/>
+    
+  </entry>
   
   <entry>
     <title>web移动端调试笔记</title>
@@ -27,7 +52,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;常见的几种调试方式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#常见的几种调试方式&quot;&gt;&lt;/a&gt; 常见的几
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;常见的几种调试方式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#常见的几种调试方式&quot;&gt;&lt;/a&gt; 常见的几
       
     
     </summary>
@@ -52,7 +77,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;p&gt;每次在 mac 中 打开 iTerm, 提示：&lt;/p&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;p&gt;每次在 mac 中 打开 iTerm, 提示：&lt;/p&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
       
     
     </summary>
@@ -73,13 +98,13 @@
     <link href="http://mcdowell8023.github.io/2020/04/01/%E4%BD%BF%E7%94%A8scrcpy%E8%BF%9E%E6%8E%A5%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E8%BF%9B%E8%A1%8C%E6%8A%95%E5%B1%8F%E6%BC%94%E7%A4%BA/"/>
     <id>http://mcdowell8023.github.io/2020/04/01/使用scrcpy连接安卓手机进行投屏演示/</id>
     <published>2020-04-01T07:40:35.000Z</published>
-    <updated>2020-04-23T01:30:43.158Z</updated>
+    <updated>2020-05-07T03:00:14.640Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;需要演示手机投屏到电脑上&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#需要演示手机投屏到电脑上&quot;&gt;&lt;/a
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;需要演示手机投屏到电脑上&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#需要演示手机投屏到电脑上&quot;&gt;&lt;/a
       
     
     </summary>
@@ -104,7 +129,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:15 GMT+0800 (GMT+08:00) --&gt;&lt;blockquote&gt;&lt;p&gt;本篇 是 JavaScript 从头来 的第二篇。&lt;br&gt;数据类型，在面试中经常问到。 判断数据类型也是日常开发中的常见
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;blockquote&gt;&lt;p&gt;本篇 是 JavaScript 从头来 的第二篇。&lt;br&gt;数据类型，在面试中经常问到。 判断数据类型也是日常开发中的常见
       
     
     </summary>
@@ -131,7 +156,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;blockquote&gt;&lt;p&gt;经常在开发中，发现自己知识盲区。其实还是基础不牢固。所以一直想，抽时间从新走下，查漏补缺。&lt;/p&gt;&lt;/blockquot
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;blockquote&gt;&lt;p&gt;经常在开发中，发现自己知识盲区。其实还是基础不牢固。所以一直想，抽时间从新走下，查漏补缺。&lt;/p&gt;&lt;/blockquot
       
     
     </summary>
@@ -158,7 +183,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:15 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;记一次vue-项目调整兼容-ie8&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#记一次vue-项目调整兼
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;记一次vue-项目调整兼容-ie8&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#记一次vue-项目调整兼
       
     
     </summary>
@@ -183,7 +208,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:15 GMT+0800 (GMT+08:00) --&gt;&lt;blockquote&gt;&lt;p&gt;本文仅以前端视角，接触使用 docekr。认识较为肤浅，大神请绕行。&lt;/p&gt;&lt;/blockquote&gt;&lt;hr&gt;&lt;ul&gt;&lt;
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;blockquote&gt;&lt;p&gt;本文仅以前端视角，接触使用 docekr。认识较为肤浅，大神请绕行。&lt;/p&gt;&lt;/blockquote&gt;&lt;hr&gt;&lt;ul&gt;&lt;
       
     
     </summary>
@@ -208,7 +233,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;fullscreen-浏览器-全屏-api&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fullscre
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;fullscreen-浏览器-全屏-api&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#fullscre
       
     
     </summary>
@@ -233,7 +258,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;cascader-级联选择-遇到的问题&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#cascader-级
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;cascader-级联选择-遇到的问题&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#cascader-级
       
     
     </summary>
@@ -260,7 +285,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:15 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;目录&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#目录&quot;&gt;&lt;/a&gt; 目录&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;a 
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h1 id=&quot;目录&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#目录&quot;&gt;&lt;/a&gt; 目录&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;a 
       
     
     </summary>
@@ -285,7 +310,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:15 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;git-常用命令清单&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#git-常用命令清单&quot;&gt;&lt;/a&gt; gi
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;git-常用命令清单&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#git-常用命令清单&quot;&gt;&lt;/a&gt; gi
       
     
     </summary>
@@ -314,7 +339,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;博客在-github-访问访问慢&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#博客在-github-访问
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;博客在-github-访问访问慢&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#博客在-github-访问
       
     
     </summary>
@@ -337,7 +362,7 @@
     
       
       
-        &lt;!-- build time:Thu Apr 23 2020 13:58:14 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;安装启动&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#安装启动&quot;&gt;&lt;/a&gt; 安装启动&lt;/h2&gt;&lt;p&gt;依赖
+        &lt;!-- build time:Fri May 22 2020 09:49:05 GMT+0800 (GMT+08:00) --&gt;&lt;h2 id=&quot;安装启动&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#安装启动&quot;&gt;&lt;/a&gt; 安装启动&lt;/h2&gt;&lt;p&gt;依赖
       
     
     </summary>
