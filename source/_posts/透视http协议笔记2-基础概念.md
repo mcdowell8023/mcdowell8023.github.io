@@ -1,12 +1,12 @@
 ---
-title: 透视http协议笔记2
+title: 透视http协议笔记2-基础概念
 comments: true
 mathjax: true
 categories:
-  - 技术帖
+  - 基础
 tags:
-  - tag1
-  - tag2
+  - 笔记
+  - http
 date: 2020-05-25 09:38:07
 ---
 
