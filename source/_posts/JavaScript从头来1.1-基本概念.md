@@ -410,26 +410,3 @@ for (var i = 0; i < 10; i++) {
 > return 语句会中断函数的处理，并将指定的表达式的值作为函数的返回值返回。如果没有指定表达式，函数的返回值将会是 undefined 值
 
 `return 语句`
-
-## 异常
-
-throw 语句来抛出异常对象(异常值)
-
-```js
-// throw语句的语法规则
-throw 表达式
-```
-
-借助 try-catch 抛出 捕捉抛出异常
-
-```js
-// try-catch-finally结构的语法
-try {
-  // 正常 流程
-} catch (erro) {
-  // 捕捉的异常
-  throw erro
-} finally {
-  // 成功、异常 都会 执行
-}
-```
