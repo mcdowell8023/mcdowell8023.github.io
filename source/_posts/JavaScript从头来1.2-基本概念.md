@@ -424,3 +424,7 @@ is('String', new String('test')) // true
 
 - 参考 1：[typeof 和 instanceOf 的区别](https://segmentfault.com/a/1190000000730982)
 - 参考 2：[为什么用 Object.prototype.toString.call(obj)检测对象类型?](https://www.cnblogs.com/youhong/p/6209054.html)
+
+---
+
+[js 从原始数据类型到深浅拷贝](https://juejin.im/post/5ed3664de51d45783e17b12a?utm_source=gold_browser_extension)
