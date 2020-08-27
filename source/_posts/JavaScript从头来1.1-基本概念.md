@@ -1,5 +1,5 @@
 ---
-title: JavaScript从头来1-基本概念
+title: JavaScript从头来1.1-基本概念
 comments: true
 mathjax: true
 categories:
