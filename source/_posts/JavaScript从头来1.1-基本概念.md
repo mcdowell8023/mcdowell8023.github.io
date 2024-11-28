@@ -11,8 +11,6 @@ tags:
 date: 2020-03-27 06:47:24
 ---
 
-> 经常在开发中，发现自己知识盲区。其实还是基础不牢固。所以一直想，抽时间从新走下，查漏补缺。
-
 ## javascript 简介
 
 ### 特点
@@ -35,6 +33,41 @@ date: 2020-03-27 06:47:24
 ## 表达式和语句的构成
 
 JavaScript 的源代码本质上是一个语句的集合。语句是由**语句**和**表达式**所构成的。表达式则由表达式和 运算符所构成。即使在一条语句中包含其他语句，只要对这条被包含的语句继续进行分解， 最终都会到达仅包含**保留字、表达式与符号**的状态。
+
+### html 中的 javascript (script 标签)
+
+> 将 JavaScript 插入 HTML 的主要方法是使用`<script>`元素。
+
+#### 关于 script 标签 属性
+
+- **src**: 没有表述 行内代码；有表示加载加载外部 js
+- **type**: 代替原来的 language 属性，表示语言类型。
+  - 浏览器中始终是 `text/javascript`
+  - 如果值是 `module`,代码会被理解为 ES6 模块，才可以使用 import 和 export 关键字
+- **nomodule**: 在不支持 type="module"【不支持 import 和 export】 的浏览器（IE11）执行的代码
+- **crossorigin（跨源）**
+  - 基本概念
+    - 协议(pro tocal)、域名(domain)、端口(port) 有一个不同的，都视作 跨源（跨域）
+    - CORS 元素：【Cross Origin Resource Share】
+    - `<script>`、`<link>`、`<imag>`、`<audio>`、`<video>`
+  - 配置相关请求的 CORS(跨源资源共享)设置。
+    - 默认不使用 CORS。crossorigin= "" 或者不进行设置 ，为 anonymous 配置
+    - crossorigin= "**anonymous**" 配置文件请求**不必设置凭据标志**。
+    - crossorigin="**use-credentials**"设置凭据 标志，意味着**出站请求会包含凭据**。
+- **integrity**:可选。安全校验值
+  - 用于 第三方 资源 提供的散列值 进行计算校验。校验 安全，于确保内容分发网络(CDN)不会提供恶意内容。
+- **关于 script 加载**
+  - **defer**: **不阻塞文档正常加载**，但是**延迟执行**（文档完全被解析和显示 之后再执行）。只对外部脚本文件有效。 【IE7 及一下也可使用】。
+  - **async**: **异步加载脚本**，**加载后 立即执行脚本**(可能会 阻塞文档加载)。【立即开始下载脚本，但不能阻止页面其他动作，比如下载资源或等待其他脚本加载】src 引入方式有效。
+  - `<script type="module"></script> `: 使用 defer 方式进行加载 [ 异步加载脚本,延迟到 文档都加载完后 才去执行 ]
+  - `<script type="module" async></script> `: 使用 async 方式进行加载[ 异步加载脚本后，立即执行 ]
+  - **没值**: 会**阻塞文档加载**，**开始加 脚本**，**直至 加载并执行完毕**后，才会继续执行 文档加载。[通常应该把`<script>`元素放到页面末尾，介于主内容之后及`</body>`标签 之前]
+
+#### 加载优化
+
+> 预加载 `<link rel="preload" href="gibberish.js">`
+
+[MDN 通过 link 标签 rel="preload"进行内容预加载](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content)
 
 ### 关键字和保留字
 

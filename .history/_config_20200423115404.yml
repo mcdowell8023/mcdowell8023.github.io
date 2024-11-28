@@ -84,8 +84,8 @@ deploy:
   # branch: master
   repo:
     github: git@github.com:mcdowell8023/mcdowell8023.github.io.git,master
-    # coding: git@git.dev.tencent.com:mcdowell8023/mcdowell8023.git,master
-    # gitee: git@gitee.com:mcdowell8023/mcdowell8023.git,master
+    coding: git@git.dev.tencent.com:mcdowell8023/mcdowell8023.git,master
+    gitee: git@gitee.com:mcdowell8023/mcdowell8023.git,master
 
 ## feed 订阅 rss
 feed:
