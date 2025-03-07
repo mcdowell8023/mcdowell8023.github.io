@@ -5,9 +5,8 @@ mathjax: true
 categories:
   - 工具
 tags:
-  - zsh
-  - bash
-  - adb
+  - 脚本
+  - 环境变量
 date: 2020-04-22 11:48:55
 ---
 
