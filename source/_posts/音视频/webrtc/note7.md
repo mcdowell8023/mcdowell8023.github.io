@@ -42,7 +42,7 @@ SDP 片段
 
 ## 交换 SDP 信息
 
-![WebRTC 处理过程图](../image//images/webRTC/webretc1to1signal.png)
+![WebRTC 处理过程图](/images/webRTC/webretc1to1signal.png)
 
 两个客户端 / 浏览器进行 1 对 1 通话时，首先要**进行信令交互**，而交互的**一个重要信息就是 SDP 的交换**
 
