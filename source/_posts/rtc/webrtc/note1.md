@@ -141,7 +141,7 @@ const mediaStreamContrains = {
 
 - rtmp 的直播解决方案和 webRTC 之间优劣势在什么地方？
 
-  - Rtmp 底层用的 tcp,wenrtc 底层主要使用 udp,使用 tcp 就注定他在极端网络情况下没法实时通信
+  - Rtmp 底层用的 tcp,webrtc 底层主要使用 udp,使用 tcp 就注定他在极端网络情况下没法实时通信
 
 - NAT 穿越是啥？
   - P2P，端与端直接进行连接，不需要服务器中转数据，这样可以节省服务器带宽，但并不意味着不需要服务器，服务器作为辅助功能
