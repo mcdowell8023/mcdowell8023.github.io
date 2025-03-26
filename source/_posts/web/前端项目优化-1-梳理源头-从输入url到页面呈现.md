@@ -246,7 +246,7 @@ Content-Type 会出现 application/javascript、text/css、text/html，即对应
 
 ![解析 CSS  生成 CSSOM](/images/web_optimize/1/render_Recalculate_Style.png)
 
-#### 布局（第二次称回流）
+#### 布局（第二次称回流 或者重排）
 
 根据 Render Tree 渲染树，对树中每个节点进行计算，确定每个节点在页面中的宽度、高度和位置。
 
@@ -310,14 +310,14 @@ Content-Type 会出现 application/javascript、text/css、text/html，即对应
 
 ![分块-Tiling](/images/web_optimize/1/render_tiling.png)
 
-#### 光栅化
+#### 光栅化 - 将图块转为位图
 
 - 光栅化: 合成线程会对**视口附近的图块生成位图**，**以此提高渲染效率**。
 - 这一过程需要GPU加速 【例如使用 wil-change、opacity，就会通过 GPU 加速显示】
 
 而渲染进程也维护了一个栅格化的线程池，专门用于将图块转为位图。
 
-#### 画-Draw（合成）
+#### 画-Draw（合成）- 合成线程计算位置交给GPU呈现
 
 合成线程 **计算每个位图在屏幕上的位置**，交给GPU进行最终呈现。
 
@@ -331,7 +331,7 @@ Content-Type 会出现 application/javascript、text/css、text/html，即对应
 
 ## 相关问题
 
-1. 什么是回流/重排（reflow）？
+### 什么是回流/重排（reflow）？
 
     * reflow 的本质就是重新计算 layout 树。
     * 第一次确定节点的大小和位置，称之为布局（layout）
@@ -340,9 +340,154 @@ Content-Type 会出现 application/javascript、text/css、text/html，即对应
       * 比如改变一个网页元素的位置，就会同时触发"重排"和"重绘"，因为布局改变了
       * 所以回流是一件很消耗性能的事情
     * 什么属性会导致回流呢？
-      * `width top position..` （比如 DOM 结构发生改变 / 修改了布局）
+      * 页面初始渲染
+      * 添加/删除可见DOM元素
+      * 改变元素位置
+      * 改变元素尺寸（宽、高、内外边距、边框等）
+      * 改变元素内容（文本或图片等）
+      * 改变窗口尺寸
+      * 读取元素宽高距离等属性 （并且这些属性 为了获取最新的 尺寸信息，还会**会强制刷新队列，要求样式修改任务立刻执行**）
+    * 不同的条件下发生重排的范围及程度会不同
+      * 某些情况甚至会重排整个页面，比如滑动滚动条，或者改变窗口尺寸。
 
-2. 什么是重绘 （repaint）
+
+#### 浏览器优化
+
+##### 渲染队列机制：
+> 渲染队列：当页面中的元素发生改变时，浏览器会把这个操作放入一个队列中，然后根据优先级来依次执行这些操作。
+
+```js
+div.style.left = '10px';
+div.style.top = '10px';
+div.style.width = '10px';
+div.style.height = '10px';
+```
+
+以上，理论上会发生4次重排 ,但是实际上 因为**渲染队列**机制，**只会发生1次重排**(现代浏览器)
+
+> 浏览器都有 **渲染队列**的机制 ,改变了元素的一个样式会导致浏览器发生**重排或重绘时** ,它会进入一个渲染队列 ,然后浏览器继续往下看，如果下面还有样式修改 ,那么同样入队 ,直到下面没有样式修改 ,浏览器会按**照渲染队列批量执行**来优化重排过程，一并修改样式 ,这样就把本该4次的重排优化为1次
+
+
+
+##### 读取元素宽高位置 会导致重排和重绘
+
+```js
+div.style.left = '10px';
+console.log(div.offsetLeft);
+
+div.style.top = '10px';
+console.log(div.offsetTop);
+
+div.style.width = '20px';
+console.log(div.offsetWidth);
+
+div.style.height = '20px';
+console.log(div.offsetHeight);
+```
+上面代码会导致**四次重排**和重绘。
+
+> offsetTop、offsetLeft、offsetWidth、offsetHeight
+> clientTop、clientLeft、clientWidth、clientHeight
+> scrollTop、scrollLeft、scrollWidth、scrollHeight
+> getComputedStyle()
+
+这些会**强制刷新队列**,**要求样式修改任务立刻执行**,来获取最新的尺寸数据。
+
+因为浏览器并不确定在下面的代码中是否还有修改同样的样式，为了获取到当前正确的的即时值不得不立刻执行渲染队列触发重排！！！
+
+#### 重绘与重排性能优化
+
+1. 读写分离
+
+```js
+div.style.left = '10px';
+div.style.top = '10px';
+div.style.width = '20px';
+div.style.height = '20px';
+
+console.log(div.offsetLeft);
+console.log(div.offsetTop);
+console.log(div.offsetWidth);
+console.log(div.offsetHeight);
+// 这样就仅仅发生1次重排了
+```
+
+2.样式集中改变
+
+ - 借助 修改 classNaem 的方式 修改样式
+ - 借助 cssText 的方式修改样式
+
+```js
+// 现代浏览器 因为渲染队列机制 会触发一次重排
+div.style.left = '10px';
+div.style.top = '10px';
+div.style.width = '20px';
+div.style.height = '20px';
+// 古代浏览器 会触发4次重排
+// 需要使用cssText属性合并所有样式改变 减少重排次数 （合并成一次）
+div.style.cssText = 'left:10px;top:10px;width:20px;height:20px;';
+// 或者 使用 calss 替换 style 修改样式 减少重排次数
+div.className = 'new-class';
+```
+
+3.缓存布局信息
+
+
+```js
+// 因为读取 元素 尺寸信息 的特性，读写叠加操作造成了 2次重排
+div.style.left = div.offsetLeft + 1 + 'px';
+div.style.top = div.offsetTop + 1 + 'px';
+
+// 先读取布局信息，然后修改 （ 本质还是读写分离 ）
+var curLeft = div.offsetLeft;
+var curTop = div.offsetTop;
+div.style.left = curLeft + 1 + 'px';
+div.style.top = curTop + 1 + 'px';
+```
+
+4.元素批量操作
+
+  - 元素脱离文档
+  - 改变样式
+  - 元素回归文档
+
+```js
+// 先隐藏元素，然后修改
+var ul = document.getElementById('demo');
+ul.style.display = 'none';
+for(var i = 0; i < 1e5; i++){
+    var li = document.createElement('li');
+    var text = document.createTextNode(i);
+    li.appendChild(text);
+    ul.appendChild(li);
+}
+ul.style.display = 'block';
+
+// 使用DocumentFragment 文档片段接口（一个没有父对象的最小文档对象）
+// 先存储操作后，批量 插入
+var ul = document.getElementById('demo');
+var frg = document.createDocumentFragment();
+for(var i = 0; i < 1e5; i++){
+    var li = document.createElement('li');
+    var text = document.createTextNode(i);
+    li.appendChild(text);
+    frg.appendChild(li);
+}
+ul.appendChild(frg);
+
+// 先克隆在替换
+var ul = document.getElementById('demo');
+var clone = ul.cloneNode(true);
+for(var i = 0; i < 1e5; i++){
+    var li = document.createElement('li');
+    var text = document.createTextNode(i);
+    li.appendChild(text);
+    clone.appendChild(li);
+}
+ul.parentNode.replaceChild(clone,ul);
+```
+
+### 什么是重绘 （repaint）
 
     * repaint 的本质就是**重新根据分层信息计算了绘制指令**。
     * 当第一次渲染内容称之为绘制（paint）
@@ -352,263 +497,9 @@ Content-Type 会出现 application/javascript、text/css、text/html，即对应
     * 什么属性会导致重绘呢？
     * `color background box-shadow..` (比如修改背景色、文字颜色、边框颜色、样式等)
 
-3. 为什么transform效率高
+### 为什么transform效率高
 
     因为 transform 既**不会影响布局**也**不会影响绘制指令**，它影响的只是渲染流程的最后一个「draw」阶段
-    - 由于 draw 阶段在合成线程中，所以 transform 的变化几乎不会影响渲染主线程。
+    - 由于 draw 阶段在合成线程中，直接丢给GPU 计算绘制，所以 transform 的变化几乎不会影响渲染主线程。
     - 反之，渲染主线程无论如何忙碌，也不会影响 transform 的变化。
 
-
----
-
-## 缓存技术方案实践
-1. 静态资源优化方案与思考
-- 配置超长时间的本地缓存 —— 节省带宽，提高性能
-- 采用内容摘要作为缓存更新依据 —— 精确的缓存控制
-- 静态资源 CDN 部署 —— 优化网络请求
-- 更资源发布路径实现非覆盖式发布 —— 平滑升级
-2. 充分利用浏览器缓存机制
-- 对于某些不需要缓存的资源，可以使用 Cache-control: no-store ，表示该资源不需要缓存
-- 对于频繁变动的资源（比如经常需要刷新的首页，资讯论坛新闻类），可以使用 Cache-Control: no-cache 并配合 ETag 使用，表示该资源已被缓存，但是每次都会发送请求询问资源是否更新。
-- 对于代码文件来说，通常使用 Cache-Control: max-age=31536000 并配合策略缓存使用，然后对文件进行指纹处理，一旦文件名变动就会立刻下载新的文件。
-- 静态资源文件通过 Service Worker 进行缓存控制和离线化加载
-
----
-
-## 首屏加载
-浏览器从响应用户输入网址地址，到首屏内容渲染完成的时间，此时整个网页不一定要全部染完成，但需要展示当前视窗需要的内容
-利用 performance.timing 提供的数据
-通过 DOMContentLoad 或者 performance 来计算出首屏时间
-// 方案-
-document.addEventListener('DoMcontentLoaded',(event)=>{
-    console.log('first contentful painting');
-});
-// 方案二:
-performance.getEntriesByName("first-contentful-paint")[0].startTime
-// performance.getEntriesByName("first-contentful-paint")[θ]
-//会返回一个 PerformancePaintTiming的实例，结构如下:
-｛
-    name:"first-contentful-paint",
-    entryType:"paint",
-    startTime:587.88888802123415,
-    duration: 0
-}｝
-
-首屏性能优化  性能优化
-（1） 减少http请求的次数：CSS Sprites，JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存，图片服务器。
-（2）前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
-（3）用innerHTML代替DOM操作，减少DOM操作次数，优化JavaScript性能。
-（5）少用全局变量，缓存DOM节点查找的结果。减少IO读取操作。。
-1.资源加载优化
-减少资源大小
-  代码、图片压缩，可以利用打包工具
-  对HTML、CSS、JavaScript这些文件去除冗余字符（例如不必要的注释、空格符和换行符等），再进行压缩，减小文件数据大小，加快浏览器解析文件编码。
-  代码拆分
-  Gzip
-    1. 浏览器和服务器都需要支持gzip编码
-    2. 采用 LZ77 算法与 Huffman 编码来压缩文件，是一种无损压缩算法
-    3. 压缩比率在3-10倍左右（纯文本），可以大大节省服务器的网络带宽
-    重复度越高的文件可压缩的空间就越大，图片的重复度是很低，不适合
-    原理
-    1. 浏览器请求url，并在请求头中设置属性accept-encoding: gzip。这表明该浏览器是支持gzip，该参数浏览器在请求资源时会自动带上。
-    2. 服务器在接收到浏览器发送的请求之后，服务器会返回压缩后的文件，并在响应头中包含content-encoding: gzip。若是没有gzip文件，会返回为压缩的文件。
-    3. 浏览器接收到服务器的响应之后，根据content-encoding: gzip响应头使用gzip策略自动解压压缩后的资源，通过content-type内容类型决定怎么编码读取该文件内容。
-    应用
-    前端借助构建工具，预先生成gz文件，缺点是构打包后构建的产物体积会变大，优点是不耗费服务器的性能。
-    webpack安装compression-webpack-plugin
-    Vite 使用vite-plugin-compression 来实现
-    在 vue.congig.js 中引入并修改 webpack 配置
-const CompressionPlugin=require('compression-webpack-plugin')
-
-configurewebpack:(config)=>{
-    if(process.env.NODE ENV === 'production'){
-    // 为生产环境修改配置.
-    config.mode ='production'
-    return {
-        plugins:[new CompressionPlugin({
-            test:/\.js$|\.html$|\.css/，//匹配文件名
-            threshold:10240，//对超过10k的数据进行压缩
-            deleteoriginalAssets:false//是否网除原文件
-          })]
-        }
-    }
-
-//在服务器我们也要做相应的配置 如果发送请求的浏览器支持 gzip，
-//Nginx 服务器配置文件中
-http {
-    gzip on;
-    gzip_types text/plain text/css application/javascript;
-}
-减少HTTP请求次数
-  HTTP强缓存  Expires（http1.0）和Cache-Control(http1.1
-  Service Worker 离线缓存
-  本地存储(合理利用 localStorage等)
-  合并文件，合并请求(nginx-http-concat模块。雪碧图等)
-  使Ajax可缓存。
-  非必须组件延迟加载。
-  未来所需组件预加载
-提高http请求响应速度
-  CDN 内容分发网络
-  CDN服务商，网站的静态资源如图片、CSS文件、JavaScript文件等都可以缓存到CDN节点上，当用户访问网站时，CDN会根据用户的地理位置，从最近的节点提供资源，极大减少了资源加载时间。CDN还提供了缓存功能，可以进一步提高资源加载速度。
-  HTTP弱缓存 last-modified 和 etag
-  减少DNS查找时间
-  - 减少外部资源的引用
-  - 使用DNS预解析，DNS缓存将资源分布到恰当数量的主机名，平衡并行下载和DNS查询
-  - 使用可靠的DNS服务提供商
-  http2
-  新型的网络协议，通过多路复用、头部压缩等技术，可以显著提高网络性能。通过在服务器上启用HTTP/2，可以显著提高页面加载速度，Nginx配置。
-server {
-    listen 443 ssl http2;
-    # 其他配置
-}
-  提高服务器性能
-  配置更高的服务器、使用SSD硬盘、增加服务器带宽
-  负载均衡：将用户请求分配到多台服务器，减少单台服务器的负载，Nginx。
-优化资源加载时机
-  按需加载 UI框架按需加载
-  懒加载，图片懒加载
-   1）小图标合并成雪碧图，进而减少img的HTTP请求次数；
- 2）图片加载较多时，采用懒加载的方案，滚动页面可视区时再加载渲染图片
-  预加载(preload 等
-优化资源、内容加载方式
-  客户端内H5页可考虑离线包等方式
-  内容直出
-2.页面渲染优化
-优化html代码
-    js外链放在底部，加上时间戳
-    避免阻塞页面的渲染。当浏览器遇到JavaScript文件时，会停止解析HTML，直到JavaScript文件加载完毕并执行完毕，这会导致页面渲染被阻塞。
-    CSS文件应该放在HTML文档的头部
-    确保在页面渲染之前，样式已经加载完毕。如果CSS文件放在底部，会导致页面在没有样式的情况下渲染，产生闪烁和白屏现象。
-    减少DOM数量
-优化渲染关键路径方案
-   异步加载非关键资源，优化渲染关键路径，优化页面渲染性能，减少页面白屏时间。
-  - 优化JS：JavaScript文件加载会阻塞DOM树的构建，可以给<script>标签添加异步属性，浏览器的HTML解析就不会被js文件阻塞。async属性表示脚本在下载完成后立即执行，而 defer 属性表示脚本在HTML解析完成后再执行。
-  - 优化CSS：浏览器每次遇到<link>标签时，浏览器就需要向服务器发出请求获得CSS文件，然后才继续构建DOM树和CSSOM树，可以合并所有CSS成一个文件，减少HTTP请求，减少关键资源往返加载的时间，优化渲染速度。
-优化js、css代码
-  使用webworker
-    为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。
-  长任务分片执行
-  减少重排、重绘
-  降低css选择器复杂性
-  当需要设置的样式很多时设置className而不是直接操作style
-  避免使用CSS Expression（css表达式）又称Dynamic properties(动态属性)
-优化动面效果
-  使用requestAnimationFrame
-  使用 transform和opacity 属性来实现动面
-  合理使用wi-change战transiateZ来提升某些元素到新的合成层
-使用SSR
-  组件或页面通过服务器生成html字符串，再发送到浏览器
-  从头搭建一个服务端渲染是很复杂的vue 应用建议使用 Nuxt.js 实现服务端渲染
-
----
-
-页面卡顿定位工具  加载慢原因
-原因
-  - JavaScript 代码出现严重错误导致后续的脚本执行中断
-  - 网络延时问题
-  - 资源文件体积是否过大
-  - 资源是否重复发送请求去加载了
-  - 加载脚本的时候，渲染内容堵塞了
-  - URL 网址无效或者含有中文字符
-  - 浏览器兼容问题
-https://cloud.tencent.com/developer/article/1733071
-https://zhuanlan.zhihu.com/p/144934079
-- 检查网络连接是否正常，尝试刷新页面或重新加载。
-- 查看浏览器控制台是否有报错信息，如果有，根据报错信息进行代码修复。
-- 分析网页加载过程，查看是否有资源加载失败或加载时间过长的情况，逐个排查并修复。
-- 考虑使用一些工具进行网页性能分析，找出加载速度慢的原因，并进行相应的优化。
-- 如果问题仍然存在，可以寻求专业的前端开发人员的帮助，进行深入的调试和修复。
-
-
-
-
-## 离线包
-1. 各域名下的 /app/webzip/zipVersion.json 开启允许跨域
-   - 每次 新增域名 需要 对其 开启允许跨域
-   - 以往都是在 s3 桶上直接配置；
-   - 少部分 `app-h5部署在nodestatic目录的项目` 需要 在 node 服务中配置跨域具体参照 pro 项目
-2. 离线包中使用 window.location2 代替 window.location。
-   - window.location2 仅提供 location 的取值操作 （PS：如 reload 和 replace 方法 无法实现）
-   - 如果需要跳转 需要使用配套方法 `window.KEWLWebZip.jump`
-3. 依赖资源（例如 kewlglobal.js）更新，需要同步更新对应 zip 包
-   - 需要 重新打 zip 包,来更新 对应项目的 kewlglobal.js
-4. 因为替换 location，所以神策采用了本地版本 /app/js/dev/src/lib/sensorsdata.min.js
-5. zip 包 关于 svga 的部分：
-   - 服务端下发 -- 图床上地址： 根据接口而来，不参与 zip 打包，无需关注
-   - 写死在 h5 本地，此处需要注意：
-     - 必须 放在 `public`目录 或者 `assets` 目录
-6. iframe 使用 url 必须使用 window.location2 拼接全路径后使用
-      ```js
-         const iframeUrl = `${window.location2.origin}/activity/2022/dist/nightClub/index.html?source=2`
-      ```
-7. 为排查 方便排查，在zip 情况时，神策上报的 url 中拼接了 zipVer=[当前zip包版本]
-
-
-## CSS优化
-- 内联首屏关键CSS
-- 异步加载CSS
-  - 使用javascript将link标签插到head标签最后
-  - 设置link标签media属性为noexis，浏览器会认为当前样式表不适用当前类型，会在不阻塞页面渲染的情况下再进行下载。加载完成后，将media的值设为screen或all，从而让浏览器开始解析CSS
-  - 通过rel属性将link元素标记为alternate可选样式表，也能实现浏览器异步加载。同样别忘了加载完成之后，将rel设回stylesheet
-- 资源压缩  利用webpack、rollup等模块化工具，将css代码进行压缩
-- 合理使用选择器
-  - 不嵌套使用过多复杂选择器，最好不要三层以上
-  - 使用id选择器就没必要再进行嵌套
-  - 通配符和属性选择器效率最低，避免使用
-- 减少使用昂贵的属性
-  - 如box-shadow/border-radius/filter/透明度/:nth-child等
-- 不要使用@import
-  - @import会影响浏览器的并行下载，使得页面在加载时增加额外的延迟，增添了额外的往返耗时
-  - 而且多个@import可能会导致下载顺序紊乱
-- cssSprite，合成所有icon图片，减少了http请求，用宽高加上backgroud-position的背景图方式显现出我们要的icon图，background-repeat，background-position的组合background-image进行背景定位
-- 把小的icon图片转成base64编码
-- CSS3动画或者过渡尽量使用transform和opacity来实现动画，不要使用left和top属性
-CSS模块化
-针对问题
-- 高耦合——改样式的时候，会同时影响其他地方的样式，导致意外的样式问题
-- 低复用——重复编写相同的样式，即枯燥乏味又导致 CSS 体积过大，从而影响开发体验与页面加载体验
-https://segmentfault.com/a/1190000039772466
-
-
-
-
-
-
-## 如果某个页面有几百个函数需要执行，可以怎么优化页面的性能?
-1. 异步执行:将函数调用转换为异步操作，使用setTimeout或requestAnimationFrame 等方法将函数分散到多个时间片中执行。这样可以避免一次性执行大量函数造成的阻塞。
-2. 分批处理:将函数分批执行，而不是一次性执行所有函数。可以使用循环和计数器来控制每个批次的函数数量，并在每个批次之间添加适当的延迟，以确保主线程有足够的空闲时间处理其他任务。
-3. Web Worker:将函数放入Web Worker中执行，以在后台线程中进行计算，避免阻塞主线程。Web Worker可以独立于主线程运行，并发出消息来与主线程通食
-4. 函数优化:检查需要执行的函数是否可以进行优化，例如减少计算量、缓存结果、避免重复计算等。通过优化单个函数的执行效率，可以减少整体执行的时间和资源消耗
-5. 任务调度库:使用第三方任务调度库，如 async.js 或 p-queue 等，来管理并行执行和限制同时执行的函数数量。这些库提供了更灵活的任务管理和控制，可以根据需求进行配置和调整。
-
-
-## 列表有 100000 个数据，这个该怎么进行展示?
-我们需要思考的问题:该处理是否必须同步完成? 数据是否必须按顺序完成?
-1. 将数据分页，利用分页的原理，每次服务器端只返回一定数目的数据，浏览器每次只对一部分进行加载，
-2. 使用懒加载的方法，每次加载一部分数据，其余数据当需要使用时再去加载
-3. 使用数组分块技术，基本思路是为要处理的项目创建一个队列，然后设置定时器每过一段时间取出一部分数据，然后再使用定时器取出下一个要处理的项目进行处理，接着再设置另一个定时器。
-4. 虚拟列表，每次只渲染需要视口的部分
-  Vue 的响应性系统默认是深度的。虽然这让状态管理变得更直观，但在数据量巨大时，深度响应性也会导致不小的性能负担，因为每个属性访问都将触发代理的依赖追踪。
-  Vue 确实也为此提供了一种解决方案，通过使用 shallowRef() 和 shallowReactive() 来绕开深度响应。浅层式 API 创建的状态只在其顶层是响应式的，对所有深层的对象不会做任何处理。这使得对深层级属性的访问变得更快，但代价是，我们现在必须将所有深层级对象视为不可变的，并且只能通过替换整个根状态来触发更新
-```js
-const shallowArray = shallowRef([
-  /* 巨大的列表，里面包含深层的对象 */
-])
-
-// 这不会触发更新...
-shallowArray.value.push(newObject)
-// 这才会触发更新
-shallowArray.value = [...shallowArray.value, newObject]
-
-// 这不会触发更新...
-shallowArray.value[0].foo = 1
-// 这才会触发更新
-shallowArray.value = [
-  {
-    ...shallowArray.value[0],
-    foo: 1
-  },
-  ...shallowArray.value.slice(1)
-]
-
-```
